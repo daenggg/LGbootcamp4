@@ -4,6 +4,41 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>구구단 출력기</title>
+        <style>
+            /* 결과 카드 컨테이너 */
+            .result-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+
+            /* 단별 카드 */
+            .table-card {
+                background: gray;
+                border-radius: 12px;
+                padding: 20px 24pcx;
+                min-width: 150px;
+                animation: fadeIn 0.3s ease;
+            }
+
+            @keyframes fadeIn {
+                form {
+                    opacity: 0;
+                    transform: translateY(8px);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateY(0);
+                }
+            }
+
+            /* 에러메세지 */
+            .error-message {
+                color: red;
+                font-weight: bold;
+                padding: 12px 0;
+            }
+        </style>
     </head>
     <body>
         <h1>구구단 출력기</h1>
@@ -22,7 +57,7 @@
             <button class="btn" onclick="showGugudan()">출력하기</button>
             <button class="btn" onclick="clearResult()">초기화</button>
 
-            <div class="result-contaniner" id="result"></div>
+            <div class="result-container" id="result"></div>
         </div>
 
         <script>
@@ -69,7 +104,7 @@
                     for (let i = 1; i <= 9; i++) {
                         const answer = dan * i;
                         // string(값).padStart(자릿수, 채울 문자) : 앞을 채워서 자릿수를 맞춤
-                        // 예 : String(6).padstart(2,' ') -> '6' (숫자 정렬을 위해서 사용)
+                        // 예 : String(6).padstart(2,' ') -> ' 6' (숫자 정렬을 위해서 사용)
                         html += `<p>${dan} x ${i} = ${String(answer).padStart(2, " ")}</p>`;
                     }
 
@@ -85,6 +120,11 @@
                 document.getElementById("startDan").value = 2;
                 document.getElementById("endDan").value = 9;
             }
+
+            // 엔터 키로도 실행
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Enter") showGugudan();
+            });
         </script>
     </body>
 </html>
