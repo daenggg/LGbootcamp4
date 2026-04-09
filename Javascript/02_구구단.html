@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>구구단 출력기</title>
+    </head>
+    <body>
+        <h1>구구단 출력기</h1>
+        <p class="desc">시작 단과 끝 단을 입력하고 버튼을 누르세요.</p>
+        <div class="controls">
+            <label for="startDan">시작 단</label>
+            <input type="number" id="startDan" value="2" min="1" max="9" />
+
+            <label for="endDan">끝 단</label>
+            <input type="number" id="endDan" value="9" min="1" max="9" />
+
+            <!-- self closing tag -->
+            <!-- <input /> -->
+            <!-- self closing tag -->
+
+            <button class="btn" onclick="showGugudan()">출력하기</button>
+            <button class="btn" onclick="clearResult()">초기화</button>
+
+            <div class="result-contaniner" id="result"></div>
+        </div>
+
+        <script>
+            function showGugudan() {
+                const startInput = document.getElementById("startDan");
+                const endInput = document.getElementById("endDan");
+                const result = document.getElementById("result");
+
+                // parseInt(문자열) : 문자열을 정수(integer)로 변환
+                // input의 .value는 항상 문자열 -> 숫자 계산을 위해 반드시 변환 필요
+                const start = parseInt(startInput.value);
+                const end = parseInt(endInput.value);
+
+                // isNaN(값) : Not a Number -> 숫자가 아니면 true 반환
+                // 빈 칸이나 문자를 입력하면 parseint 결과가 NaN이 됨.
+                if (isNaN(start) || isNaN(end)) {
+                    result.innerHTML = '<p class="error-message">숫자를 입력해 주세요.</p>';
+                    // return :함수 즉시 종료 -> 아래 코드는 실행되지 않음 (조기 종료 패턴)
+                    return;
+                }
+
+                if (start < 1 || end > 9) {
+                    result.innerHTML = '<p class="error-message">1단부터 9단까지만 입력 가능합니다.</p>';
+                    return;
+                }
+                if (start > end) {
+                    result.innerHTML = '<p class="error-message">시작 단이 끝 단보다 클 수 없어요!</p>';
+                    return;
+                }
+
+                // 결과 초기화 후 생성
+                result.innerHTML = "";
+
+                // 이중 for문으로 구구단 생성
+                for (let dan = start; dan <= end; dan++) {
+                    // document.createElement('태그명') : JS로 HTML 요소를 동적으로 생성
+                    // HTML에 직접 쓰지 않고 JS로 요소를 만들어 화면에 추가할 때 사용
+                    const card = document.createElement("div");
+                    // element.className : 생성한 요소에 CSS 클래스를 부여 (스타일 적용하는 용도)
+                    card.className = "table-card";
+                    // 백틱(`) + ${변수} : 템플릿 리터럴 = 변수를 문자열 안에 바로 삽입
+                    let html = `<h3>${dan}단</h3>`;
+
+                    for (let i = 1; i <= 9; i++) {
+                        const answer = dan * i;
+                        // string(값).padStart(자릿수, 채울 문자) : 앞을 채워서 자릿수를 맞춤
+                        // 예 : String(6).padstart(2,' ') -> '6' (숫자 정렬을 위해서 사용)
+                        html += `<p>${dan} x ${i} = ${String(answer).padStart(2, " ")}</p>`;
+                    }
+
+                    // element.innerHTML : 요소 안에 HTML 문자열로 내용을 한 번에 설정
+                    card.innerHTML = html;
+                    // appendChild(요소) : 부모 요소의 맨 끝에 자식 요소를 추가
+                    result.appendChild(card);
+                }
+            }
+
+            function clearResult() {
+                document.getElementById("result").innerHTML = "";
+                document.getElementById("startDan").value = 2;
+                document.getElementById("endDan").value = 9;
+            }
+        </script>
+    </body>
+</html>
