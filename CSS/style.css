@@ -129,7 +129,7 @@ section h2 {
     transition: background-color 0.2s;
 }
 
-#skills li:hover{
+#skills li:hover {
     background-color: #ffb4c1;
 }
 
@@ -147,13 +147,17 @@ section h2 {
     padding: 24px;
     margin-bottom: 20px;
     /* hover 시 그림자 애니메이션 */
-    transition: box-shadow 0.3s, transform 1s;
+    transition:
+        box-shadow 0.3s,
+        transform 1s;
 }
 
 #projects article:hover {
     box-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
     transform: translateY(-10px);
-    transition: box-shadow 0.3, transform 1s;
+    transition:
+        box-shadow 0.3,
+        transform 1s;
 }
 
 /* 7. contact 섹션 */
@@ -180,7 +184,7 @@ footer {
 
 /* 반응형 (미디어 쿼리) */
 /* 화면 너비가 768px 이하일 때 */
-@media (max-width:768px) {
+@media (max-width: 768px) {
     header {
         flex-direction: column;
         gap: 12px;
@@ -189,7 +193,8 @@ footer {
     section {
         padding: 60px 20px;
     }
-    #about, #contact {
+    #about,
+    #contact {
         padding: 60px 20px;
     }
 }
