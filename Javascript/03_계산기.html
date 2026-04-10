@@ -4,19 +4,26 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>계산기</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Dongle&family=Gasoek+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Saira+Stencil:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
         <style>
             .calculator {
-                background: #b6c2e2;
+                background: #eed3ee;
                 padding: 24px;
                 margin: 100px;
                 width: 320px;
-                box-shadow: 0 24px 24px 10px #818181;
-                border-radius: 20px;
+                box-shadow: 0 24px 24px 10px #b9a8af;
+                border-radius: 50px;
+                border: 1px solid #575757;
             }
 
             /* 디스플레이 */
             .display {
-                background: #20415c6c;
+                background: #c5e2ca6c;
                 padding: 20px 16px;
                 margin-bottom: 20px;
                 min-height: 90px;
@@ -24,24 +31,35 @@
                 flex-direction: column;
                 justify-content: flex-end;
                 align-items: flex-end;
-                border-radius: 20px;
+                border-radius: 50px;
                 flex-wrap: wrap;
+                border: 1px solid #535353;
+                box-shadow: inset 0 0px 20px 20px #cccccc;
             }
 
             .display .expression {
-                font-size: 0.85rem;
-                color: rgb(255, 255, 255);
+                font-size: 1rem;
+                color: rgb(0, 0, 0);
                 min-height: 20px;
                 flex-wrap: wrap;
                 max-width: 250px;
+                font-weight: 600;
+                color: #000000;
+                font-family: "Saira Stencil", sans-serif;
+                font-style: italic;
+                padding-right: 30px;
             }
 
             .display .current {
                 font-size: 2.4rem;
-                font-weight: 300;
-                color: white;
+                color: rgb(0, 0, 0);
                 letter-spacing: 1px;
                 flex-wrap: wrap;
+                font-weight: 600;
+                color: #000000;
+                font-family: "Saira Stencil", sans-serif;
+                font-style: italic;
+                padding-right: 20px;
             }
 
             /* 버튼 그리드 */
@@ -52,16 +70,46 @@
             }
 
             button {
-                padding: 20px 0;
+                height: 65px;
+                /* padding: 20px 0; */
                 cursor: pointer;
-                border-radius: 20px;
-                box-shadow: 0 2px 2px 2px #dadada;
-                font-size: large;
+                border-radius: 100px;
+                box-shadow: 0 2px 4px 4px #fff6f6;
+                font-size: 40px;
+                font-weight: 350;
+                color: #646464;
+                font-family: "Saira Stencil", sans-serif;
+                font-style: italic;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             /* 0 버튼 2칸 차지 */
             .span-two {
                 grid-column: span 2;
+            }
+
+            .Red {
+                background-color: rgb(243, 145, 145);
+            }
+            .Pink {
+                background-color: rgb(255, 223, 250);
+            }
+            .Yellow {
+                background-color: rgb(255, 255, 206);
+            }
+
+            .Green {
+                background-color: rgb(216, 245, 213);
+            }
+
+            .Purple {
+                background-color: rgb(229, 193, 243);
+            }
+
+            .Blue {
+                background-color: rgb(204, 229, 250);
             }
         </style>
     </head>
@@ -74,33 +122,33 @@
 
             <div class="buttons">
                 <!-- 1행 -->
-                <button class="btn-util" onclick="clearAll()">AC</button>
-                <button class="btn-util" onclick="toggleSign()">+/-</button>
-                <button class="btn-util" onclick="percent()">%</button>
-                <button class="btn-operator" onclick="setOperator('/')">➗</button>
+                <button class="btn-util Red" onclick="clearAll()">AC</button>
+                <button class="btn-util Pink" onclick="toggleSign()">+/-</button>
+                <button class="btn-util Pink" onclick="percent()">%</button>
+                <button class="btn-operator Pink" onclick="setOperator('/')">÷</button>
 
                 <!-- 2행 -->
-                <button class="btn-number" onclick="inputNum('7')">7</button>
-                <button class="btn-number" onclick="inputNum('8')">8</button>
-                <button class="btn-number" onclick="inputNum('9')">9</button>
-                <button class="btn-operator" onclick="setOperator('*')">x</button>
+                <button class="btn-number Yellow" onclick="inputNum('7')">7</button>
+                <button class="btn-number Yellow" onclick="inputNum('8')">8</button>
+                <button class="btn-number Yellow" onclick="inputNum('9')">9</button>
+                <button class="btn-operator Yellow" onclick="setOperator('*')">x</button>
 
                 <!-- 3행 -->
-                <button class="btn-number" onclick="inputNum('4')">4</button>
-                <button class="btn-number" onclick="inputNum('5')">5</button>
-                <button class="btn-number" onclick="inputNum('6')">6</button>
-                <button class="btn-operator" onclick="setOperator('-')">-</button>
+                <button class="btn-number Green" onclick="inputNum('4')">4</button>
+                <button class="btn-number Green" onclick="inputNum('5')">5</button>
+                <button class="btn-number Green" onclick="inputNum('6')">6</button>
+                <button class="btn-operator Green" onclick="setOperator('-')">-</button>
 
                 <!-- 4행 -->
-                <button class="btn-number" onclick="inputNum('1')">1</button>
-                <button class="btn-number" onclick="inputNum('2')">2</button>
-                <button class="btn-number" onclick="inputNum('3')">3</button>
-                <button class="btn-operator" onclick="setOperator('+')">+</button>
+                <button class="btn-number Purple" onclick="inputNum('1')">1</button>
+                <button class="btn-number Purple" onclick="inputNum('2')">2</button>
+                <button class="btn-number Purple" onclick="inputNum('3')">3</button>
+                <button class="btn-operator Purple" onclick="setOperator('+')">+</button>
 
                 <!-- 5행 -->
-                <button class="btn-number span-two" onclick="inputNum('0')">0</button>
-                <button class="btn-number" onclick="inputDot()">.</button>
-                <button class="btn-equals" onclick="calculate()">=</button>
+                <button class="btn-number span-two Blue" onclick="inputNum('0')">0</button>
+                <button class="btn-number Blue" onclick="inputDot()">.</button>
+                <button class="btn-equals Blue" onclick="calculate()">=</button>
             </div>
         </div>
 
