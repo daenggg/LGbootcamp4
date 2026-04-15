@@ -1,4 +1,3 @@
-// 1. 타입 정의
 type Category = "all" | "outer" | "top" | "bottom";
 
 interface ClothingItem {
@@ -11,9 +10,8 @@ interface ClothingItem {
     reviewCount: number;
 }
 
-// 2. 데이터 (20개)
+// 더미 데이터 (20개)
 const clothingData: ClothingItem[] = [
-    // --- TOP (상의) ---
     {
         id: 1,
         name: "[JUST BETTER] 헤이디 프릴 블라우스",
@@ -200,37 +198,32 @@ const clothingData: ClothingItem[] = [
     }
 ];
 
-// --- 찜한 상품을 관리하는 Manager 클래스 추가 ---
 class WishlistManager {
     private items: ClothingItem[] = [];
 
-    // 찜 목록에 추가 (이미 있으면 무시)
+    // 찜 목록에 추가
     public add(item: ClothingItem): void {
         const existing = this.items.find((i) => i.id === item.id);
         if (!existing) {
             this.items.push(item);
         } else {
-            // 이미 있으면 제거 (토글 기능)
+            // 이미 있으면 제거
             this.remove(item.id);
         }
     }
 
-    // 찜 목록에서 제거
     public remove(id: number): void {
         this.items = this.items.filter((item) => item.id !== id);
     }
 
-    // 복사본 반환
     public getItems(): ClothingItem[] {
         return [...this.items];
     }
 
-    // 개수 반환
     public getCount(): number {
         return this.items.length;
     }
 
-    // 특정 아이템 찜 여부
     public hasItem(id: number): boolean {
         return this.items.some((item) => item.id === id);
     }
@@ -238,7 +231,7 @@ class WishlistManager {
 
 const wishlistManager = new WishlistManager();
 
-// 3. 실행 로직
+// 실행 로직
 window.addEventListener("DOMContentLoaded", () => {
     const clothesGrid = document.querySelector(
         ".clothes-grid",
@@ -251,7 +244,6 @@ window.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // 찜 목록 DOM 요소
     const wishlistToggleBtn = document.getElementById("wishlistToggleBtn") as HTMLButtonElement;
     const wishlistSidebar = document.getElementById("wishlistSidebar") as HTMLElement;
     const wishlistOverlay = document.getElementById("wishlistOverlay") as HTMLDivElement;
@@ -259,7 +251,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const wishlistItemsContainer = document.getElementById("wishlistItems") as HTMLDivElement;
     const wishlistCountBadge = document.getElementById("wishlistCount") as HTMLElement;
 
-    // 찜 목록 렌더링 함수
+    // 찜 목록 함수
     const renderWishlist = () => {
         const items = wishlistManager.getItems();
         wishlistCountBadge.textContent = String(wishlistManager.getCount());
@@ -346,7 +338,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 마우스 이벤트 (애니메이션 제어)
+    // 마우스 이벤트
     clothesGrid.addEventListener("mouseover", () => {
         clothesGrid.classList.add("paused");
     });
@@ -355,7 +347,7 @@ window.addEventListener("DOMContentLoaded", () => {
         clothesGrid.classList.remove("paused");
     });
 
-    // 찜하기 버튼 클릭 이벤트 (이벤트 위임)
+    // 찜하기 버튼 클릭 이벤트
     clothesGrid.addEventListener("click", (e: MouseEvent) => {
         const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".add-wishlist-btn");
         if (!btn) return;
@@ -363,18 +355,16 @@ window.addEventListener("DOMContentLoaded", () => {
         const id = Number(btn.dataset.id);
         const item = clothingData.find((i) => i.id === id);
         if (item) {
-            wishlistManager.add(item); // 추가 (이미 있으면 제거되도록 짬)
-            renderWishlist(); // 사이드바 업데이트
+            wishlistManager.add(item);
+            renderWishlist();
 
-            // 현재 화면이 전체/아우터 등 여러 필터일 수 있으니 현재 필터 상태를 알기가 조금 애매함.
-            // 하지만 카테고리 필터 중 active된 것을 찾아 다시 렌더링하면 됨.
             const activeCategoryBtn = document.querySelector('.filter-btn.active') as HTMLButtonElement;
             const category = (activeCategoryBtn?.dataset.category as Category) || "all";
-            render(category); // 버튼 하트 상태 업데이트를 위해 다시 렌더링
+            render(category);
         }
     });
 
-    // 찜 목록 항목 삭제 이벤트 (이벤트 위임)
+    // 찜 목록 항목 삭제 이벤트
     wishlistItemsContainer.addEventListener("click", (e: MouseEvent) => {
         const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".wishlist-item-remove");
         if (!btn) return;
@@ -409,9 +399,6 @@ window.addEventListener("DOMContentLoaded", () => {
         if (e.key === "Escape") closeWishlist();
     });
 
-    // 최초 실행
     renderWishlist();
-
-    // 최초 실행
     render("all");
 });
