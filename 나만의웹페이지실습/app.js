@@ -1,22 +1,11 @@
-type Category = "all" | "outer" | "top" | "bottom";
-
-interface ClothingItem {
-    id: number;
-    name: string;
-    price: number;
-    category: Exclude<Category, "all">;
-    image: string;
-    description: string;
-    reviewCount: number;
-}
-
+"use strict";
 // 더미 데이터 (20개)
-const clothingData: ClothingItem[] = [
+const clothingData = [
     {
         id: 1,
         name: "[JUST BETTER] 헤이디 프릴 블라우스",
         price: 26800,
-        category: "top", 
+        category: "top",
         image: "👕",
         description: "프렌치 감성의 프릴과 펀칭 레이스 디테일이 돋보이는 제작 블라우스입니다.",
         reviewCount: 15
@@ -66,7 +55,6 @@ const clothingData: ClothingItem[] = [
         description: "부드러운 양기모 안감으로 겨울철 따뜻하고 편안하게 착용 가능한 맨투맨입니다.",
         reviewCount: 210
     },
-
     // --- BOTTOM (하의) ---
     {
         id: 7,
@@ -131,7 +119,6 @@ const clothingData: ClothingItem[] = [
         description: "깔끔하게 떨어지는 A라인 핏으로 다리 라인을 예쁘게 살려주는 스커트입니다.",
         reviewCount: 62
     },
-
     // --- OUTER (아우터) ---
     {
         id: 14,
@@ -197,101 +184,79 @@ const clothingData: ClothingItem[] = [
         reviewCount: 51
     }
 ];
-
 class WishlistManager {
-    private items: ClothingItem[] = [];
-
+    items = [];
     // 찜 목록에 추가
-    public add(item: ClothingItem): void {
+    add(item) {
         const existing = this.items.find((i) => i.id === item.id);
         if (!existing) {
             this.items.push(item);
-        } else {
+        }
+        else {
             // 이미 있으면 제거
             this.remove(item.id);
         }
     }
-
-    public remove(id: number): void {
+    remove(id) {
         this.items = this.items.filter((item) => item.id !== id);
     }
-
-    public getItems(): ClothingItem[] {
+    getItems() {
         return [...this.items];
     }
-
-    public getCount(): number {
+    getCount() {
         return this.items.length;
     }
-
-    public hasItem(id: number): boolean {
+    hasItem(id) {
         return this.items.some((item) => item.id === id);
     }
 }
-
 const wishlistManager = new WishlistManager();
-
 // 실행 로직
 window.addEventListener("DOMContentLoaded", () => {
-    const clothesGrid = document.querySelector(
-        ".clothes-grid",
-    ) as HTMLDivElement;
-    const filterBtns =
-        document.querySelectorAll<HTMLButtonElement>(".filter-btn");
-
+    const clothesGrid = document.querySelector(".clothes-grid");
+    const filterBtns = document.querySelectorAll(".filter-btn");
     if (!clothesGrid) {
         console.error("클래스명이 .clothes-grid인 요소를 찾을 수 없습니다.");
         return;
     }
-
-    const wishlistToggleBtn = document.getElementById("wishlistToggleBtn") as HTMLButtonElement;
-    const wishlistSidebar = document.getElementById("wishlistSidebar") as HTMLElement;
-    const wishlistOverlay = document.getElementById("wishlistOverlay") as HTMLDivElement;
-    const wishlistCloseBtn = document.getElementById("wishlistCloseBtn") as HTMLButtonElement;
-    const wishlistItemsContainer = document.getElementById("wishlistItems") as HTMLDivElement;
-    const wishlistCountBadge = document.getElementById("wishlistCount") as HTMLElement;
-
+    const wishlistToggleBtn = document.getElementById("wishlistToggleBtn");
+    const wishlistSidebar = document.getElementById("wishlistSidebar");
+    const wishlistOverlay = document.getElementById("wishlistOverlay");
+    const wishlistCloseBtn = document.getElementById("wishlistCloseBtn");
+    const wishlistItemsContainer = document.getElementById("wishlistItems");
+    const wishlistCountBadge = document.getElementById("wishlistCount");
     // 찜 목록 함수
     const renderWishlist = () => {
         const items = wishlistManager.getItems();
         wishlistCountBadge.textContent = String(wishlistManager.getCount());
-
         if (items.length === 0) {
             wishlistItemsContainer.innerHTML = "<p>찜한 상품이 없습니다.</p>";
             return;
         }
-
         wishlistItemsContainer.innerHTML = items
-            .map(
-                (item) => `
+            .map((item) => `
             <div class="wishlist-item-row">
                 <span class="wishlist-item-name">${item.image} ${item.name}</span>
                 <span class="wishlist-item-price">${item.price.toLocaleString()}원</span>
                 <button class="wishlist-item-remove" data-remove-id="${item.id}">X</button>
             </div>
-        `,
-            )
+        `)
             .join("");
     };
-
     // 렌더링 함수
-    const render = (category: Category) => {
+    const render = (category) => {
         // 필터링된 데이터 가져오기
-        const filtered =
-            category === "all"
-                ? clothingData
-                : clothingData.filter((item) => item.category === category);
-
+        const filtered = category === "all"
+            ? clothingData
+            : clothingData.filter((item) => item.category === category);
         // 무한 루프 효과를 위해 필터링된 데이터를 2배로 복제
         const displayData = [...filtered, ...filtered];
-
         // --- 애니메이션 속도 동적 계산 (항상 일정한 속도 유지) ---
         // 카드 1개당 차지하는 너비: 280px(카드 너비) + 20px(gap 여백) = 300px
         // 화면이 -50% 이동할 때 실제 이동하는 거리는 '원본 데이터 개수 * 300px'
         const moveDistance = filtered.length * 300;
         const speedPxPerSec = 50; // 초당 50px 이동 (좀 더 천천히)
         const duration = displayData.length === 0 ? 0 : (moveDistance / speedPxPerSec);
-
         // 애니메이션 초기화 후 재적용
         clothesGrid.style.animation = 'none';
         void clothesGrid.offsetWidth; // 브라우저 리플로우 강제 발생 (애니메이션 재시작 위함)
@@ -299,13 +264,11 @@ window.addEventListener("DOMContentLoaded", () => {
             clothesGrid.style.animation = `scroll ${duration}s linear infinite`;
         }
         // ----------------------------------------------------
-
         clothesGrid.innerHTML = displayData
-            .map(
-                (item) => {
-                    // 항목이 찜 목록에 있는지 확인
-                    const isWishlisted = wishlistManager.hasItem(item.id);
-                    return `
+            .map((item) => {
+            // 항목이 찜 목록에 있는지 확인
+            const isWishlisted = wishlistManager.hasItem(item.id);
+            return `
             <article class="clothes-card">
                 <div class="clothes-img" style="font-size: 80px; text-align: center; padding: 30px 20px;">
                     ${item.image}
@@ -322,83 +285,71 @@ window.addEventListener("DOMContentLoaded", () => {
                     ${isWishlisted ? "❤️" : "🤍"}
                 </button>
             </article>
-        `})
+        `;
+        })
             .join("");
     };
-
     // 버튼 이벤트 연결
     filterBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
             filterBtns.forEach((b) => b.classList.remove("active"));
             btn.classList.add("active");
-
-            const selectedCategory =
-                (btn.dataset.category as Category) || "all";
+            const selectedCategory = btn.dataset.category || "all";
             render(selectedCategory);
         });
     });
-
     // 마우스 이벤트
     clothesGrid.addEventListener("mouseover", () => {
         clothesGrid.classList.add("paused");
     });
-
     clothesGrid.addEventListener("mouseout", () => {
         clothesGrid.classList.remove("paused");
     });
-
     // 찜하기 버튼 클릭 이벤트
-    clothesGrid.addEventListener("click", (e: MouseEvent) => {
-        const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".add-wishlist-btn");
-        if (!btn) return;
-
+    clothesGrid.addEventListener("click", (e) => {
+        const btn = e.target.closest(".add-wishlist-btn");
+        if (!btn)
+            return;
         const id = Number(btn.dataset.id);
         const item = clothingData.find((i) => i.id === id);
         if (item) {
             wishlistManager.add(item);
             renderWishlist();
-
-            const activeCategoryBtn = document.querySelector('.filter-btn.active') as HTMLButtonElement;
-            const category = (activeCategoryBtn?.dataset.category as Category) || "all";
+            const activeCategoryBtn = document.querySelector('.filter-btn.active');
+            const category = activeCategoryBtn?.dataset.category || "all";
             render(category);
         }
     });
-
     // 찜 목록 항목 삭제 이벤트
-    wishlistItemsContainer.addEventListener("click", (e: MouseEvent) => {
-        const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".wishlist-item-remove");
-        if (!btn) return;
-
+    wishlistItemsContainer.addEventListener("click", (e) => {
+        const btn = e.target.closest(".wishlist-item-remove");
+        if (!btn)
+            return;
         const id = Number(btn.dataset.removeId);
         wishlistManager.remove(id);
         renderWishlist();
-
-        const activeCategoryBtn = document.querySelector('.filter-btn.active') as HTMLButtonElement;
-        const category = (activeCategoryBtn?.dataset.category as Category) || "all";
+        const activeCategoryBtn = document.querySelector('.filter-btn.active');
+        const category = activeCategoryBtn?.dataset.category || "all";
         render(category);
     });
-
     // 사이드바 여닫기
     const openWishlist = () => {
         wishlistSidebar.classList.add("open");
         wishlistOverlay.classList.add("active");
         wishlistSidebar.setAttribute("aria-hidden", "false");
     };
-
     const closeWishlist = () => {
         wishlistSidebar.classList.remove("open");
         wishlistOverlay.classList.remove("active");
         wishlistSidebar.setAttribute("aria-hidden", "true");
     };
-
     wishlistToggleBtn.addEventListener("click", openWishlist);
     wishlistCloseBtn.addEventListener("click", closeWishlist);
     wishlistOverlay.addEventListener("click", closeWishlist);
-
-    document.addEventListener("keydown", (e: KeyboardEvent) => {
-        if (e.key === "Escape") closeWishlist();
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape")
+            closeWishlist();
     });
-
     renderWishlist();
     render("all");
 });
