@@ -435,7 +435,7 @@ img {
     box-shadow: var(--shadow);
 
     /* 오른쪽 바깥으로 숨겨두기 */
-    /* transform: translateX(100%); */
+    transform: translateX(100%);
     transition: transform 0.3s ease;
 }
 .cart-sidebar.open {

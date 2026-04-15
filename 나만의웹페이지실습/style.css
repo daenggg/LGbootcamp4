@@ -1,318 +1,193 @@
-:root {
-    --primary-color: #FA622F; /* 직방 오렌지/레드 톤 */
-    --text-color: #333333;
-    --text-light: #777777;
-    --bg-color: #f8f9fa;
-    --white: #ffffff;
-    --border-color: #e5e5e5;
-    --box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    --transition: all 0.3s ease;
-}
-
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Noto Sans KR', sans-serif;
 }
+/* main {
+    background-color: var(--background--white);
+    max-width: 1300px;
+} */
 
-body {
-    color: var(--text-color);
-    background-color: var(--white);
-    line-height: 1.6;
+:root {
+    --background--primary: rgb(81, 133, 133);
+    --background--babyPink: rgb(255, 234, 239);
+    --background--pink: rgb(229, 117, 141);
+    --background--gray: rgb(147, 131, 138);
+    --background--white: #f5f5f5;
 }
-
 a {
     text-decoration: none;
     color: inherit;
 }
-
-ul {
-    list-style: none;
-}
-
-/* Header & Nav */
 .header {
-    position: fixed;
+    z-index: 100;
+    background-color: var(--background--white);
     top: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: transparent;
-    transition: var(--transition);
-    border-bottom: 1px solid transparent;
+    position: sticky;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
-.header.scrolled {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-.header.scrolled .main-nav a,
-.header.scrolled .user-menu a {
-    color: var(--text-color);
-}
-
-.header-container {
-    max-width: 1200px;
-    margin: 0 auto;
+.header-inner {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-}
-
-.logo img {
-    height: 32px;
-    filter: brightness(0) invert(1);
-    transition: var(--transition);
-}
-
-.header.scrolled .logo img {
-    filter: none;
-}
-
-.main-nav ul {
-    display: flex;
-    gap: 2.5rem;
-}
-
-.main-nav a {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--white);
-    transition: var(--transition);
-    position: relative;
-}
-
-.main-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-color);
-    transition: var(--transition);
-}
-
-.main-nav a:hover::after {
-    width: 100%;
-}
-
-.user-menu {
-    display: flex;
-    gap: 1.5rem;
-}
-
-.user-menu a {
-    font-size: 0.9rem;
-    color: var(--white);
-    font-weight: 500;
-    transition: var(--transition);
-}
-
-.user-menu .btn-agent {
-    border: 1px solid rgba(255,255,255,0.5);
-    padding: 0.4rem 1rem;
-    border-radius: 20px;
-}
-
-.header.scrolled .user-menu .btn-agent {
-    border-color: var(--border-color);
-}
-
-/* Hero Section */
-.hero {
-    height: 60vh;
-    min-height: 500px;
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('hero_bg.png') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding-top: 80px; 
-}
-
-.hero-content {
-    width: 100%;
-    max-width: 800px;
-    padding: 0 2rem;
-}
-
-.hero h1 {
-    color: var(--white);
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    animation: fadeInDown 0.8s ease-out;
-}
-
-.search-box {
-    display: flex;
-    align-items: center;
-    background-color: var(--white);
-    border-radius: 8px;
-    padding: 0.5rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    animation: fadeInUp 0.8s ease-out 0.2s both;
-}
-
-.search-icon {
-    font-size: 1.2rem;
-    color: var(--text-light);
-    padding: 0 1rem;
-}
-
-#searchInput {
-    flex: 1;
-    border: none;
-    outline: none;
-    font-size: 1.1rem;
-    padding: 1rem 0;
-    color: var(--text-color);
-}
-
-#searchInput::placeholder {
-    color: #aaaaaa;
-}
-
-.btn-search {
-    background-color: var(--primary-color);
-    color: var(--white);
-    border: none;
-    border-radius: 6px;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.btn-search:hover {
-    background-color: #e04f1a;
-}
-
-/* Services */
-.services {
-    padding: 5rem 2rem;
-    background-color: var(--white);
-}
-
-.container {
-    max-width: 1200px;
+    /* color: ; */
+    max-width: 1300px;
     margin: 0 auto;
+    padding: 20px 160px;
+    align-items: center;
 }
 
-.service-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
+.logo {
+    font-size: 30px;
+    font-weight: 400;
 }
 
-.card {
+.login {
+    background-color: white;
+    color: black;
+    padding: 8px 16px;
+    border-radius: 10px;
+    border-style: none;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.login:hover {
+    background-color: rgb(221, 221, 221);
+}
+
+.header-nav {
+    padding: 8px 16px;
+    display: flex;
+    gap: 40px;
+}
+a:hover {
+    color: var(--background--gray);
+}
+.hero-section {
+    background: url("./images/202004088003_500.jpg") center;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hero-content {
     text-align: center;
-    padding: 2.5rem 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    transition: var(--transition);
-    background-color: var(--white);
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--box-shadow);
-    border-color: var(--primary-color);
-}
-
-.card-icon {
-    width: 80px;
-    height: 80px;
-    background-color: #fff5f2;
-    color: var(--primary-color);
-    border-radius: 50%;
+    font-weight: 500;
+    color: var(--background--pink);
+    border-radius: 100px;
+    width: 400px;
+    height: 130px;
+    background-color: #fff7f7cc;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
-    font-size: 2rem;
-    margin: 0 auto 1.5rem;
-    transition: var(--transition);
+}
+.main-clothes {
+    background-color: var(--background--babyPink);
+    color: black;
+    text-align: center;
+    padding: 80px 60px 60px 60px;
+}
+.main-clothes2 {
+    color: var(--background--gray);
+}
+.category-filters {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-.card:hover .card-icon {
-    background-color: var(--primary-color);
-    color: var(--white);
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.card h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: var(--text-color);
+.filter-btn.active {
+    background: #ff4d7d; /* 에이블리 핑크 느낌 */
+    color: white;
+    border-color: #ff4d7d;
 }
 
-.card p {
-    font-size: 0.9rem;
-    color: var(--text-light);
+.clothes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    min-height: 200px;
+}
+.clothes-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-/* Footer */
-.footer {
-    background-color: #fafafa;
-    border-top: 1px solid var(--border-color);
-    padding: 3rem 2rem;
-    color: var(--text-light);
-    font-size: 0.85rem;
+footer {
+    height: 100px; /* 고정 높이 */
+    display: flex; /* 부모가 직접 정렬 */
+    align-items: center;
+    justify-content: left;
+    padding: 20px;
+    background-color: var(--background--white);
 }
 
-.footer-content {
+.foot {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 10px;
 }
-
-.footer-logo h2 {
-    color: #cccccc;
-    font-weight: 900;
-    font-size: 1.8rem;
-}
-
-.footer-info p {
-    margin-bottom: 0.4rem;
-}
-
-.copyright {
-    margin-top: 1rem;
-    color: #aaaaaa;
-}
-
-.footer-links {
+.footer-nav {
+    text-align: center;
+    border-radius: 100px;
     display: flex;
-    gap: 1.5rem;
-    margin-top: 1rem;
+    align-items: center;
+    gap: 20px;
+}
+/* -----------------슬라이드 루프------------------ */
+/* 1. 컨테이너: 화면 밖으로 나가는 카드를 숨김 */
+.clothes {
+    overflow: hidden;
+    width: 100%;
+    background: var(--background--babyPink);
+    padding: 20px 0;
 }
 
-.footer-links a:hover {
-    color: var(--text-color);
+/* 2. 트랙: 카드들을 한 줄로 세우고 애니메이션 적용 */
+.clothes-grid {
+    display: flex;
+    gap: 20px;
+    width: max-content; /* 내부 콘텐츠 양만큼 너비 확장 */
+    animation: scroll 20s linear infinite; /* 20초 동안 무한 반복 */
 }
 
-/* Animations */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* 3. 애니메이션 정의: 왼쪽으로 이동 */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    } /* 전체의 절반만큼 이동했을 때 루프 */
 }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* 4. 마우스 오버 시 일시정지 클래스 */
+.paused {
+    animation-play-state: paused;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-    .main-nav { display: none; }
-    .hero h1 { font-size: 2rem; }
-    #searchInput { font-size: 0.9rem; }
-    .btn-search { padding: 0.8rem 1.5rem; }
+/* 개별 카드 스타일 유지 */
+.clothes-card {
+    flex: 0 0 200px; /* 카드의 너비를 200px로 고정 */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: white;
 }
+/* ------------------------------------------------ */

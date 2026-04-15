@@ -1,182 +1,217 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>커피 프로젝트</title>
-    <!--
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>커피 프로젝트</title>
+        <!--
     시맨틱 태그
     - <header>  : 페이지 상단 (로고, 네비게이션) 보통 페이지마다 고정을 해둠
     - <nav> : 네비게이션 링크 묶음
     - <main> : 페이지 핵심 콘텐츠 로 페이지 마다 실질적으로 바뀌는 부분
     - <section> : 의미 있는 콘텐츠 구역 유사한 의미를 공유하는 영역
     - <article> : 독립적으로 의미를 갖는 콘텐츠
-    - <aside> : 부가 콘텐츠 (장부가니 사이드바)
+    - <aside> : 부가 콘텐츠 (장바구니 사이드바)
     - <footer> : 페이지 하단 정보 헤더라는 다르게 고정되지 않아도 됨
     -->
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- 
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <!-- 
         header : 로고 + 네비게이션
     -->
-    <header class="site-header">
-      <div class="header-inner">
-        <div class="logo">
-          <span class="logo-icon">🍵</span>
-          <span class="logo-text">맛있는 커피</span>
-        </div>
+        <header class="site-header">
+            <div class="header-inner">
+                <div class="logo">
+                    <span class="logo-icon">🍵</span>
+                    <span class="logo-text">맛있는 커피</span>
+                </div>
 
-        <!-- nav : 사이트 네비게이션 모음 -->
-        <nav class="main-nav" aria-label="주 메뉴">
-          <a href="#menu-section">메뉴</a>
-          <a href="#about-section">소개</a>
-          <a href="#subcribe-section">뉴스레터</a>
-        </nav>
+                <!-- nav : 사이트 네비게이션 모음 -->
+                <nav class="main-nav" aria-label="주 메뉴">
+                    <a href="#menu-section">메뉴</a>
+                    <a href="#about-section">소개</a>
+                    <a href="#subcribe-section">뉴스레터</a>
+                </nav>
 
-        <!-- 장바구니 버튼 (js로 토글)-->
-        <button
-          class="cart-toggle-btn"
-          id="cartToggleBtn"
-          aria-label="장바구니 열기"
-        >
-          🛒장바구니 <span class="cart-count" id="cartCount">0</span>
-        </button>
-      </div>
-    </header>
+                <!-- 장바구니 버튼 (js로 토글)-->
+                <button
+                    class="cart-toggle-btn"
+                    id="cartToggleBtn"
+                    aria-label="장바구니 열기"
+                >
+                    🛒장바구니 <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </header>
 
-    <!--MAIN -페이지 핵심 콘텐츠 -->
-    <main>
-      <!-- hero section : 대형 배너 -->
-      <!-- section 시맨틱 태크 유사한 의미를 묶은 콘텐츠 영역 -->
-      <section class="hero-section" id="hero-section">
-        <div class="hero-content">
-          <p class="hero-sub">당신의 하루에 향기를 더하다</p>
-          <h1 class="hero-title">커피 한 잔의 특별한 순간</h1>
-          <a href="#menu-section" class="hero-btn">메뉴 보러 가기 ↓ </a>
-        </div>
-      </section>
+        <!--MAIN -페이지 핵심 콘텐츠 -->
+        <main>
+            <!-- hero section : 대형 배너 -->
+            <!-- section 시맨틱 태크 유사한 의미를 묶은 콘텐츠 영역 -->
+            <section class="hero-section" id="hero-section">
+                <div class="hero-content">
+                    <p class="hero-sub">당신의 하루에 향기를 더하다</p>
+                    <h1 class="hero-title">커피 한 잔의 특별한 순간</h1>
+                    <a href="#menu-section" class="hero-btn"
+                        >메뉴 보러 가기 ↓
+                    </a>
+                </div>
+            </section>
 
-      <!-- Menu section : 필터 탭 + 메뉴 그리드
+            <!-- Menu section : 필터 탭 + 메뉴 그리드
       data-속성 ,querySelectorAll + DOM조작 
       -->
-      <section class="menu-section" id="menu-section">
-        <div class="section-inner">
-          <h2 class="section-title">메뉴</h2>
+            <section class="menu-section" id="menu-section">
+                <div class="section-inner">
+                    <h2 class="section-title">메뉴</h2>
 
-          <!-- 카테고리 필터 탭 -->
-          <!-- data-category: JS에서 클릭 이벤트 처리 시 활용 -->
-          <div class="filter-tabs" role="tablist" aria-label="메뉴 카테고리">
-            <button class="filter-btn active" data-category="all" role="tab">
-              전체
-            </button>
-            <button class="filter-btn" data-category="coffee" role="tab">
-              커피
-            </button>
-            <button class="filter-btn" data-category="tea" role="tab">
-              티
-            </button>
-            <button class="filter-btn" data-category="dessert" role="tab">
-              디저트
-            </button>
-          </div>
+                    <!-- 카테고리 필터 탭 -->
+                    <!-- data-category: JS에서 클릭 이벤트 처리 시 활용 -->
+                    <div
+                        class="filter-tabs"
+                        role="tablist"
+                        aria-label="메뉴 카테고리"
+                    >
+                        <button
+                            class="filter-btn active"
+                            data-category="all"
+                            role="tab"
+                        >
+                            전체
+                        </button>
+                        <button
+                            class="filter-btn"
+                            data-category="coffee"
+                            role="tab"
+                        >
+                            커피
+                        </button>
+                        <button
+                            class="filter-btn"
+                            data-category="tea"
+                            role="tab"
+                        >
+                            티
+                        </button>
+                        <button
+                            class="filter-btn"
+                            data-category="dessert"
+                            role="tab"
+                        >
+                            디저트
+                        </button>
+                    </div>
 
-          <!-- 메뉴 카드 그리드 - JS(app.js)가 동적으로 채움  -->
-          <div class="menu-grid" id="menuGrid" role="list"></div>
-          <!-- app.js가 여기에 <article> 카드들을 생성합니다. -->
-        </div>
-      </section>
+                    <!-- 메뉴 카드 그리드 - JS(app.js)가 동적으로 채움  -->
+                    <div class="menu-grid" id="menuGrid" role="list"></div>
+                    <!-- app.js가 여기에 <article> 카드들을 생성합니다. -->
+                </div>
+            </section>
 
-      <!-- About 소개 섹션 -->
-      <section class="about-section" id="about-section">
-        <div class="section-inner about-grid">
-          <article class="about-card">
-            <span class="about-icon">🌱</span>
-            <h3>직접 선별한 원두</h3>
-            <p>세계 각지의 농장에서 직접 선별한 스페셜티 원두만 사용합니다.</p>
-          </article>
-          <article class="about-card">
-            <span class="about-icon">🔥</span>
-            <h3>당일 로스팅</h3>
-            <p>매일 아침 소량으로 로스팅해 가장 신선한 커피를 제공합니다.</p>
-          </article>
-          <article class="about-card">
-            <span class="about-icon">💚</span>
-            <h3>친환경 포장</h3>
-            <p>모든 포장재는 100% 재활용 가능한 친환경 소재를 사용합니다.</p>
-          </article>
-        </div>
-      </section>
+            <!-- About 소개 섹션 -->
+            <section class="about-section" id="about-section">
+                <div class="section-inner about-grid">
+                    <article class="about-card">
+                        <span class="about-icon">🌱</span>
+                        <h3>직접 선별한 원두</h3>
+                        <p>
+                            세계 각지의 농장에서 직접 선별한 스페셜티 원두만
+                            사용합니다.
+                        </p>
+                    </article>
+                    <article class="about-card">
+                        <span class="about-icon">🔥</span>
+                        <h3>당일 로스팅</h3>
+                        <p>
+                            매일 아침 소량으로 로스팅해 가장 신선한 커피를
+                            제공합니다.
+                        </p>
+                    </article>
+                    <article class="about-card">
+                        <span class="about-icon">💚</span>
+                        <h3>친환경 포장</h3>
+                        <p>
+                            모든 포장재는 100% 재활용 가능한 친환경 소재를
+                            사용합니다.
+                        </p>
+                    </article>
+                </div>
+            </section>
 
-      <!-- 뉴스레터 섹션 -->
-      <section class="subscribe-section" id="subscribe-section">
-        <div class="section-inner">
-          <h2 class="section-title light">뉴스레터 구독</h2>
-          <p class="subscribe-desc">
-            신메뉴와 이벤트 소식을 가장 먼저 받아보세요
-          </p>
-          <form class="subscribe-form" id="subscribeForm" novalidate>
-            <input
-              type="email"
-              id="emailInput"
-              class="subscribe-input"
-              placeholder="이메일 주소를 입력해주세요"
-              required
-              aria-label="이메일 주소"
-            />
-            <button type="submit" class="subscribe-btn">구독하기</button>
-          </form>
-          <!-- JS가 메시지를 여기헤 출력 -->
-          <p class="subscribe-msg" id="subscribeMsg"></p>
-        </div>
-      </section>
-    </main>
-    <!-- ASIDE: 장바구니 사이드바 -->
-    <aside
-      class="cart-sidebar"
-      id="cartSidebar"
-      aria-label="장바구니"
-      aria-hidden="true"
-    >
-      <div class="cart-header">
-        <h2>🛒 장바구니</h2>
-        <button
-          class="cart-close-btn"
-          id="cartCloseBtn"
-          aria-label="장바구니 닫기"
+            <!-- 뉴스레터 섹션 -->
+            <section class="subscribe-section" id="subscribe-section">
+                <div class="section-inner">
+                    <h2 class="section-title light">뉴스레터 구독</h2>
+                    <p class="subscribe-desc">
+                        신메뉴와 이벤트 소식을 가장 먼저 받아보세요
+                    </p>
+                    <form class="subscribe-form" id="subscribeForm" novalidate>
+                        <input
+                            type="email"
+                            id="emailInput"
+                            class="subscribe-input"
+                            placeholder="이메일 주소를 입력해주세요"
+                            required
+                            aria-label="이메일 주소"
+                        />
+                        <button type="submit" class="subscribe-btn">
+                            구독하기
+                        </button>
+                    </form>
+                    <!-- JS가 메시지를 여기헤 출력 -->
+                    <p class="subscribe-msg" id="subscribeMsg"></p>
+                </div>
+            </section>
+        </main>
+        <!-- ASIDE: 장바구니 사이드바 -->
+        <aside
+            class="cart-sidebar"
+            id="cartSidebar"
+            aria-label="장바구니"
+            aria-hidden="true"
         >
-          ❌
-        </button>
-      </div>
-      <!-- JS 가 장바구니 아이템을 여기에 렌더링 -->
-      <div class="cart-items" id="cartItems">
-        <p class="cart-empty">담긴 상품이 없습니다</p>
-      </div>
+            <div class="cart-header">
+                <h2>🛒 장바구니</h2>
+                <button
+                    class="cart-close-btn"
+                    id="cartCloseBtn"
+                    aria-label="장바구니 닫기"
+                >
+                    ❌
+                </button>
+            </div>
+            <!-- JS 가 장바구니 아이템을 여기에 렌더링 -->
+            <div class="cart-items" id="cartItems">
+                <p class="cart-empty">담긴 상품이 없습니다</p>
+            </div>
 
-      <div class="cart-footer">
-        <div class="cart-total">
-          <span>합계</span>
-          <strong id="cartTotal">0원</strong>
-        </div>
-        <button class="order-btn" id="orderBtn" disabled>주문하기</button>
-      </div>
-    </aside>
-    <!-- 장바구니 오버레이 반투명 배경 -->
-    <div class="cart-overlay" id="cartOberlay"></div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>합계</span>
+                    <strong id="cartTotal">0원</strong>
+                </div>
+                <button class="order-btn" id="orderBtn" disabled>
+                    주문하기
+                </button>
+            </div>
+        </aside>
+        <!-- 장바구니 오버레이 반투명 배경 -->
+        <div class="cart-overlay" id="cartOverlay"></div>
 
-    <!-- footer : 저작권, 연락처, 주소 등 공개가능한 기본 정보  -->
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <p class="footer-logo">☕ 맛있는 커피</p>
-        <p class="footer-info">서울시 강남구 대치동</p>
-        <p class="footer-copy">&copy; 2026 유레카</p>
-      </div>
-    </footer>
+        <!-- footer : 저작권, 연락처, 주소 등 공개가능한 기본 정보  -->
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <p class="footer-logo">☕ 맛있는 커피</p>
+                <p class="footer-info">서울시 강남구 대치동</p>
+                <p class="footer-copy">&copy; 2026 유레카</p>
+            </div>
+        </footer>
 
-    <!-- app.js : Typescript(app.ts) 를 컴파일한 자바스크립 파일
+        <!-- app.js : Typescript(app.ts) 를 컴파일한 자바스크립 파일
      브라우저는 TS 를 직접 실행할 수 없으므로
     tsc명령으로 컴파일한 app.js를 불러옵니다.
     -->
-    <script src="app.js"></script>
-  </body>
+        <script src="app.js"></script>
+    </body>
 </html>

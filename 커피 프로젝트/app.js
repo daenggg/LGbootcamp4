@@ -1,40 +1,5 @@
-/*
- (node가 설치되어 있어야 합니다)    
-실행 방법 -> 터미널에 tsc 파일명.ts를 작성하시면 
-컴파일 되어 -> 파일명.js 가 생성됩니다.
-*/
-// type alias : 카테고리 값 제한
-type Category = "all" | "coffee" | "tea" | "dessert";
-
-// interface: 메뉴 아이템 설계도
-interface MenuItem {
-    id: number;
-    name: string;
-    price: number;
-    category: Exclude<Category, "all">; // 'all' 제외한 세 가지만
-    emoji: string;
-    soldOut?: boolean; // optional :있어도 되고 없어도 되지만 넣으거면 타입 맞춰!
-    tags?: string[];
-}
-
-interface CartItem extends MenuItem {
-    quantity: number;
-}
-
-// Union 타입으로 주문 상태 제한
-type OrderStatus = "pending" | "preparing" | "done";
-
-// 주문 인터페이스
-interface Order {
-    id: number;
-    items: CartItem[];
-    totalPrice: number;
-    createdAt: Date;
-    status: OrderStatus;
-}
-
 // 메뉴 아이템 더미 데이터
-const menuData: MenuItem[] = [
+const menuData = [
     {
         id: 1,
         name: "아메리카노",
@@ -107,20 +72,16 @@ const menuData: MenuItem[] = [
         tags: ["신메뉴"],
     },
 ];
-
 // 클래스 + 접근 제어자
 // CartManager : 장바구니 데이터 전담 클래스
 // - 외부에서 items 배열을 직접 건드리지 못하도록 private으로 보호
 // - 데이터 조작은 반드시 public 메서드를 통해서만 수행
-
 class CartManager {
     // private : 클래스 외부에서 읽기/수정 불가
-    private items: CartItem[] = [];
-
+    items = [];
     // public add : 메뉴 아이템 추가 (이미 있으면 수량 증가)
-    public add(menu: MenuItem): void {
+    add(menu) {
         if (menu.soldOut) return;
-
         const existing = this.items.find((item) => item.id === menu.id);
         if (existing) {
             existing.quantity += 1;
@@ -129,77 +90,64 @@ class CartManager {
             this.items.push({ ...menu, quantity: 1 });
         }
     }
-
     // public remove : id에 해당하는 아이템 제거
-    public remove(id: number): void {
+    remove(id) {
         this.items = this.items.filter((item) => item.id !== id);
     }
-
     // public clear : 장바구니 전체 비우기
-    public clear(): void {
+    clear() {
         this.items = [];
     }
-
     //public getItems : 복사본 반환 -> 외부에서 원본 배열을 직접 수정하지 못하게 방어
-    public getItems(): CartItem[] {
+    getItems() {
         return [...this.items];
     }
-
     //public getTotalPrice 총 금액 계산
-    public getTotalPrice(): number {
+    getTotalPrice() {
         return this.items.reduce(
             (sum, item) => sum + item.price * item.quantity,
             0,
         );
     }
-
     //public getTotalCount : 총 수량 계산
-    public getTotalCount(): number {
+    getTotalCount() {
         return this.items.reduce((sum, item) => sum + item.quantity, 0);
     }
-
     // public isEmpty : 장바구니가 비어있는지 여부
-    public isEmpty(): boolean {
+    isEmpty() {
         return this.items.length === 0;
     }
 }
-
 // MenuManager : 메뉴 렌더링 + 카테고리 상태 전담 클래스
 class MenuManager {
-    private currentCategory: Category = "all";
-    readonly grid: HTMLDivElement;
-
-    constructor(grid: HTMLDivElement) {
+    currentCategory = "all";
+    grid;
+    constructor(grid) {
         this.grid = grid;
     }
-
-    public setCategory(cat: Category): void {
+    setCategory(cat) {
         this.currentCategory = cat;
     }
-
-    public getCurrentCategory(): Category {
+    getCurrentCategory() {
         return this.currentCategory;
     }
-
-    public render(): void {
-        const filtered: MenuItem[] =
+    render() {
+        const filtered =
             this.currentCategory === "all"
                 ? menuData
                 : menuData.filter(
                       (item) => item.category === this.currentCategory,
                   );
-
-        const html: string = filtered
+        const html = filtered
             .map((item) => {
-                const tagsHtml: string = item.tags?.length
+                const tagsHtml = item.tags?.length
                     ? item.tags
                           .map((tag) => `<span class=tag>${tag}</span>`)
                           .join("")
                     : "";
-                const soldOutHtml: string = item.soldOut
+                const soldOutHtml = item.soldOut
                     ? '<span class="tag sold">품절</span>'
                     : "";
-
                 return `
         <article class='menu-card ${item.soldOut ? "sold-out" : ""}' role=listitem>
             <div class="menu-card-emoji">${item.emoji}</div>
@@ -215,38 +163,27 @@ class MenuManager {
         `;
             })
             .join("");
-
         this.grid.innerHTML = html || "<p>메뉴가 없습니다.</p>";
     }
 }
-
 // 인스턴스 생성 - 클래스를 new 키워드로 실체화
 const cartManager = new CartManager(); // 장바구니 매니저
-
-const menuGrid = document.getElementById("menuGrid") as HTMLDivElement;
-const cartSidebar = document.getElementById("cartSidebar") as HTMLElement;
-const cartOverlay = document.getElementById("cartOverlay") as HTMLDivElement;
-const cartToggleBtn = document.getElementById(
-    "cartToggleBtn",
-) as HTMLButtonElement;
-const cartCloseBtn = document.getElementById(
-    "cartCloseBtn",
-) as HTMLButtonElement;
-const cartItems = document.getElementById("cartItems") as HTMLDivElement;
-const cartTotal = document.getElementById("cartTotal") as HTMLElement;
-const cartCountBadge = document.getElementById("cartCount") as HTMLElement;
-const orderBtn = document.getElementById("orderBtn") as HTMLButtonElement;
-const subscribeForm = document.getElementById(
-    "subscribeForm",
-) as HTMLFormElement;
-const emailInput = document.getElementById("emailInput") as HTMLInputElement;
-const subscribeMsg = document.getElementById("subscribeMsg") as HTMLElement;
-
+const menuGrid = document.getElementById("menuGrid");
+const cartSidebar = document.getElementById("cartSidebar");
+const cartOverlay = document.getElementById("cartOverlay");
+const cartToggleBtn = document.getElementById("cartToggleBtn");
+const cartCloseBtn = document.getElementById("cartCloseBtn");
+const cartItems = document.getElementById("cartItems");
+const cartTotal = document.getElementById("cartTotal");
+const cartCountBadge = document.getElementById("cartCount");
+const orderBtn = document.getElementById("orderBtn");
+const subscribeForm = document.getElementById("subscribeForm");
+const emailInput = document.getElementById("emailInput");
+const subscribeMsg = document.getElementById("subscribeMsg");
 // menuGrid는 위 DOM 레퍼런스에서 이미 선언됨
 const menuManager = new MenuManager(menuGrid);
-
 // 장바구니 UI 렌더링
-function renderCart(): void {
+function renderCart() {
     if (cartManager.isEmpty()) {
         cartItems.innerHTML = "<p>담긴 상품이 없습니다.</p>";
         cartTotal.textContent = "0원";
@@ -254,13 +191,11 @@ function renderCart(): void {
         orderBtn.disabled = true;
         return;
     }
-
     // getItems(): 복사본 배열 반환
-    const html: string = cartManager
+    const html = cartManager
         .getItems()
         .map(
-            (item) =>
-                `
+            (item) => `
     <div class="cart-item-row">
         <span class="cart-item-name">${item.emoji} ${item.name}</span>
         <span class="cart-item-qty">${item.quantity}</span>
@@ -270,71 +205,56 @@ function renderCart(): void {
     `,
         )
         .join("");
-
     cartItems.innerHTML = html;
     cartTotal.textContent = cartManager.getTotalPrice().toLocaleString() + "원";
     cartCountBadge.textContent = String(cartManager.getTotalCount());
     orderBtn.disabled = false;
 }
-
 // 장바구니에 아이템 추가 (cartManager.add())
-function addToCart(id: number): void {
-    const menu: MenuItem | undefined = menuData.find((item) => item.id === id);
+function addToCart(id) {
+    const menu = menuData.find((item) => item.id === id);
     if (!menu) return;
-
     // 데이터 처리는 CartManager에게 위임
     cartManager.add(menu);
     renderCart();
 }
-
 //  장바구니 아이템 제거 (carManager.remove())
-function removeFromCart(id: number): void {
+function removeFromCart(id) {
     cartManager.remove(id);
     renderCart();
 }
-
 // CART open / close
-function openCart(): void {
+function openCart() {
     cartSidebar.classList.add("open");
     cartOverlay.classList.add("active");
     cartSidebar.setAttribute("aria-hidden", "false");
 }
-function closeCart(): void {
+function closeCart() {
     cartSidebar.classList.remove("open");
     cartOverlay.classList.remove("active");
     cartSidebar.setAttribute("aria-hidden", "true");
 }
-
 // 이벤트 처리
-
 // 필터 탭 클릭 이벤트
-const filterBtns = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
-
+const filterBtns = document.querySelectorAll(".filter-btn");
 filterBtns.forEach((btn) => {
     btn.addEventListener("click", function () {
         filterBtns.forEach((b) => b.classList.remove("active"));
         this.classList.add("active");
-
         // menuManager.setCategory() : 필터 선택한 요소들만 나와야 함
-        menuManager.setCategory((this.dataset.category as Category) || "all");
-
+        menuManager.setCategory(this.dataset.category || "all");
         // menuManger.render() : 변경된 카테고리로 렌더링 즉 메뉴 다시 그리기
         menuManager.render();
     });
 });
-
 // 메뉴 그리드 클릭
-menuGrid.addEventListener("click", function (e: MouseEvent) {
+menuGrid.addEventListener("click", function (e) {
     // closest : 클릭된 요소에서 가장 가까운 해당 선택자 조상을 찾음
-    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(
-        ".add-cart-btn",
-    );
+    const btn = e.target.closest(".add-cart-btn");
     if (!btn || btn.disabled) return;
-
     // dataset.id = data-id 속성 값
     const id = Number(btn.dataset.id);
     addToCart(id);
-
     // 버튼 피드백 애니메이션
     btn.textContent = "담겼습니다!";
     btn.style.background = "green";
@@ -343,34 +263,26 @@ menuGrid.addEventListener("click", function (e: MouseEvent) {
         btn.style.background = "";
     }, 800);
 });
-
 // 장바구니 아이템 삭제
-cartItems.addEventListener("click", function (e: MouseEvent) {
-    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(
-        ".cart-item-remove",
-    );
+cartItems.addEventListener("click", function (e) {
+    const btn = e.target.closest(".cart-item-remove");
     if (!btn) return;
-
     const id = Number(btn.dataset.removeId);
     removeFromCart(id);
 });
-
 // 장바구니 열기/닫기
 cartToggleBtn.addEventListener("click", openCart);
 cartCloseBtn.addEventListener("click", closeCart);
 cartOverlay.addEventListener("click", closeCart);
-
 // ESC 키로 장바구니 닫기
-document.addEventListener("keydown", function (e: KeyboardEvent) {
+document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") closeCart();
 });
-
 // 주문 버튼
 orderBtn.addEventListener("click", function () {
     if (cartManager.isEmpty()) return;
-
     // Order Interface로 타입 안전하게 주문 객체 생성
-    const order: Order = {
+    const order = {
         id: Date.now(),
         items: cartManager.getItems(),
         totalPrice: cartManager.getTotalPrice(),
@@ -382,54 +294,43 @@ orderBtn.addEventListener("click", function () {
         `주문 완료! \n 주문번호: #${order.id} \n 금액: #${order.totalPrice.toLocaleString}원`,
     );
     console.log("주문 정보: ", order);
-
     // cartManager.clear() : 장바구니 초기화, 주문 완료 후에 이루어지는 초기화 과정
     cartManager.clear();
     renderCart();
     closeCart();
 });
-
 // 뉴스레터 구독 폼
 // submit 이벤트 -> 디폴트 이벤트 방지가 필요함!
-subscribeForm.addEventListener("submit", function (e: SubmitEvent) {
+subscribeForm.addEventListener("submit", function (e) {
     e.preventDefault();
-
-    const email: string = emailInput.value.trim();
-
+    const email = emailInput.value.trim();
     // 간단 이메일 유효성 검사
     if (!email || !email.includes("@")) {
         subscribeMsg.textContent = "올바른 이메일을 입력해주세요";
         subscribeMsg.style.color = "#ffe0c0";
         emailInput.value = "";
-
         return;
     }
     subscribeMsg.textContent = `${email} 구독 완료! 감사합니다.`;
     subscribeMsg.style.color = "green";
     emailInput.value = "";
-
     setTimeout(() => {
         subscribeMsg.textContent = "";
     }, 3000);
 });
-
 // 초기 렌더링
 menuManager.render();
 renderCart();
-
 console.log("웹 초기화 완료!");
 console.log(`메뉴 총 ${menuData.length}개 로드됨`);
-
 // 메뉴 통계 출력
-const categories = ["coffee", "tea", "dessert"] as const;
+const categories = ["coffee", "tea", "dessert"];
 categories.forEach((cat) => {
     const count = menuData.filter((item) => item.category === cat).length;
     console.log(`${cat} : ${count}개`);
 });
-
 // 평균 가격
 const avgPrice =
     menuData.reduce((sum, item) => sum + item.price, 0) / menuData.length;
 console.log(`평균 가격: ${avgPrice.toLocaleString()}원`);
-
-export {};
+// export {};
