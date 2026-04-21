@@ -1,0 +1,395 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* main {
+    background-color: var(--background--white);
+    max-width: 1300px;
+} */
+
+:root {
+    --background--primary: rgb(81, 133, 133);
+    --background--babyPink: rgb(255, 234, 239);
+    --background--pink: rgb(229, 117, 141);
+    --background--gray: rgb(147, 131, 138);
+    --background--white: #f5f5f5;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.header {
+    z-index: 100;
+    background-color: var(--background--white);
+    top: 0;
+    position: sticky;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    /* color: ; */
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px 160px;
+    align-items: center;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.login {
+    background-color: white;
+    color: black;
+    padding: 8px 16px;
+    border-radius: 10px;
+    border-style: none;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.login:hover {
+    background-color: rgb(221, 221, 221);
+}
+
+.header-nav {
+    padding: 8px 16px;
+    display: flex;
+    gap: 40px;
+}
+
+a:hover {
+    color: var(--background--gray);
+}
+
+.hero-section {
+    background: url("./images/Gemini_Generated_Image_eaizp4eaizp4eaiz.png") center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-content {
+    text-align: center;
+    font-weight: 500;
+    color: var(--background--pink);
+    border-radius: 100px;
+    width: 400px;
+    height: 130px;
+    background-color: #fff7f7cc;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-clothes {
+    background-color: var(--background--babyPink);
+    color: black;
+    text-align: center;
+    padding: 80px 60px 60px 60px;
+}
+
+.main-clothes2 {
+    color: var(--background--gray);
+}
+
+.category-filters {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn.active {
+    background: #ff4d7d;
+    color: white;
+    border-color: #ff4d7d;
+}
+
+.clothes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    min-height: 200px;
+}
+
+.clothes-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.footer-rich {
+    background-color: var(--background--white);
+    padding: 30px 0 30px;
+    border-top: 1px solid #eaeaea;
+    color: var(--background--gray);
+}
+
+.footer-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.footer-info {
+    flex: 2;
+    min-width: 300px;
+}
+
+.footer-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.company-details {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.footer-cs {
+    flex: 1;
+    min-width: 200px;
+}
+
+.cs-title {
+    font-size: 14px;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.cs-number {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--background--primary);
+    margin-bottom: 8px;
+}
+
+.cs-hours {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.footer-links {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 14px;
+    min-width: 150px;
+}
+
+
+.footer-bottom {
+    max-width: 1300px;
+    margin: 40px auto 0;
+    padding: 20px 40px 0;
+    border-top: 1px solid #eaeaea;
+    font-size: 12px;
+    text-align: center;
+}
+
+.wishlist-toggle {
+    background-color: white;
+    color: black;
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.wishlist-toggle:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+.add-wishlist-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.add-wishlist-btn:hover {
+    transform: scale(1.2);
+}
+
+.wishlist-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.wishlist-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.wishlist-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100%;
+    background: white;
+    z-index: 1001;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.wishlist-sidebar.open {
+    right: 0;
+}
+
+.wishlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    background: var(--background--babyPink);
+}
+
+.wishlist-close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.wishlist-items {
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.wishlist-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.wishlist-item-name {
+    flex: 1;
+    font-weight: 500;
+}
+
+.wishlist-item-price {
+    color: var(--background--pink);
+    font-weight: bold;
+    margin: 0 15px;
+}
+
+.wishlist-item-remove {
+    background: #ff4d7d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* -----------------슬라이드 루프------------------ */
+/* 1. 컨테이너: 화면 밖으로 나가는 카드를 숨김 */
+.clothes {
+    overflow: hidden;
+    width: 100%;
+    background: var(--background--babyPink);
+    padding: 20px 0;
+}
+
+/* 2. 트랙: 카드들을 한 줄로 세우고 애니메이션 적용 */
+.clothes-grid {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    /* 내부 콘텐츠 양만큼 너비 확장 */
+    /* animation 속성은 app.ts에서 동적으로 계산하여 주입합니다. */
+}
+
+/* 3. 애니메이션 정의: 왼쪽으로 이동 */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+
+    /* 전체의 절반만큼 이동했을 때 루프 */
+}
+
+/* 4. 마우스 오버 시 일시정지 클래스 */
+.paused {
+    animation-play-state: paused !important;
+}
+
+/* 개별 카드 스타일 유지 */
+.clothes-card {
+    flex: 0 0 280px;
+    /* 카드의 너비를 기존 200px에서 280px로 고정 */
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    /* 라운드 좀 더 부드럽게 */
+    background: white;
+    position: relative;
+    /* 찜 버튼 절대배치를 위해 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    /* 기본 그림자 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* 호버 애니메이션 */
+}
+
+.clothes-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    /* 호버 시 입체감 증가 */
+}
+
+/* ------------------------------------------------ */

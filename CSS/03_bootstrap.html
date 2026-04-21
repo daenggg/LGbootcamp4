@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap 랜딩 페이지</title>
+    <!-- 부트스트랩 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Bootstrap 위에 커스텀 스타일 추가 */
+        .hero {
+            background: linear-gradient(135deg, #0d0d14 0%, #2d2770 50%, #1257ac 100%);
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- 내비게이션 -->
+    <!-- navbar-expand-lg: lg (992px)이상에서 가로 메뉴 표시 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4" href="#">DevCamp</a>
+            <!-- toggler : 모바일에서 햄버거 버튼 -->
+            <button class="navbar-toggler" type="button" 
+            data-bs-toggle="collapse" data-bs-target="#navMenu"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto gap-2">
+                    <li class="nav-item"><a class="nav-link" href="#feature">목적</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#how">수강방법</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">요금제</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faQ">FaQ</a></li>
+                </ul>
+                <a href="#pricing" class="btn btn-danger ms-3">수강 신청</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 히어로 섹션 -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="mb-3">프론트엔드 개발자가 되세요</h1>
+            <p class="mb-5">비전공자도 열심히 해보세요</p>
+            <a href="#pricing" class="btn btn-danger btn-lg me-2 px-4">수강 신청하기</a>
+            <a href="#features" class="btn btn-outline-light btn-lg me-2 px-4">자세히 보기</a>
+        </div>
+    </section>
+
+    <!-- 통계 섹션 -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <!-- row + col : Bootstrap 12컬럼 그리드 -->
+             <div class="row text-center g-3">
+                <div class="col-6 col-md-3">
+                    <h2 class="fw-bold text-danger">98%</h2>
+                    <p class="text-muted mb-0">수강생 만족도</p>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h2 class="fw-bold text-danger">98%</h2>
+                    <p class="text-muted mb-0">수강생 만족도</p>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h2 class="fw-bold text-danger">98%</h2>
+                    <p class="text-muted mb-0">수강생 만족도</p>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h2 class="fw-bold text-danger">98%</h2>
+                    <p class="text-muted mb-0">수강생 만족도</p>
+                </div>
+             </div>
+        </div>
+    </section>
+    <!-- 특징 섹션 -->
+    <section class="py-5" id="features">
+        <div class="container">
+            <h2 class="section-title">왜 DevCamp인가요?</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4 text-center">
+                        <div class="feature-icon">😍</div>
+                        <h5 class="fw-bold">실무 중심 커리큘럼</h5>
+                        <p class="text-muted">이론보다 실제 프로젝트 위주로 진행합니다.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4 text-center">
+                        <div class="feature-icon">😍</div>
+                        <h5 class="fw-bold">실무 중심 커리큘럼</h5>
+                        <p class="text-muted">이론보다 실제 프로젝트 위주로 진행합니다.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4 text-center">
+                        <div class="feature-icon">😍</div>
+                        <h5 class="fw-bold">실무 중심 커리큘럼</h5>
+                        <p class="text-muted">이론보다 실제 프로젝트 위주로 진행합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 수강 방법 섹션 -->
+     <section class="py-5 bg-light" id="how">
+        <div class="container">
+            <h2 class="section-title">이렇게 진행됩니다.</h2>
+            <div class="row g-4 text-center">
+                <div class="col-md-3">
+                    <h6 class="fw-bold">수강 신청</h6>
+                    <p class="text-muted small">원하는 요금제를 선택하고 결제합니다.</p>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="fw-bold">수강 신청</h6>
+                    <p class="text-muted small">원하는 요금제를 선택하고 결제합니다.</p>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="fw-bold">수강 신청</h6>
+                    <p class="text-muted small">원하는 요금제를 선택하고 결제합니다.</p>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="fw-bold">수강 신청</h6>
+                    <p class="text-muted small">원하는 요금제를 선택하고 결제합니다.</p>
+                </div>
+            </div>
+        </div>
+     </section>
+
+     <!-- 요금제 섹션 -->
+      <section class="py-5" id="pricing">
+        <div class="container">
+            <h2 class="section-title">요금제</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="card pricing-card shadow-sm p-4 h-100">
+                        <h4 class="fw-bold">베이직</h4>
+                        <p class="display-6 fw-bold mt-2">
+                            $49 <small class="fs-6 text-muted fw-normal">/월</small>
+                        </p>
+                        <hr>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2">HTML 강의</li>
+                            <li class="mb-2">CSS 강의</li>
+                            <li class="mb-2">javascript 강의</li>
+                            <li class="mb-2">typescript 강의</li>
+                            <li class="mb-2">HTML/CSS 강의</li>
+                        </ul>
+                        <button class="btn btn-outline-dark w-100 mt-auto">선택하기</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card pricing-card shadow-sm p-4 h-100">
+                        <h4 class="fw-bold">베이직</h4>
+                        <p class="display-6 fw-bold mt-2">
+                            $49 <small class="fs-6 text-muted fw-normal">/월</small>
+                        </p>
+                        <hr>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2">HTML 강의</li>
+                            <li class="mb-2">CSS 강의</li>
+                            <li class="mb-2">javascript 강의</li>
+                            <li class="mb-2">typescript 강의</li>
+                            <li class="mb-2">HTML/CSS 강의</li>
+                        </ul>
+                        <button class="btn btn-outline-dark w-100 mt-auto">선택하기</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card pricing-card shadow-sm p-4 h-100">
+                        <h4 class="fw-bold">베이직</h4>
+                        <p class="display-6 fw-bold mt-2">
+                            $49 <small class="fs-6 text-muted fw-normal">/월</small>
+                        </p>
+                        <hr>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2">HTML 강의</li>
+                            <li class="mb-2">CSS 강의</li>
+                            <li class="mb-2">javascript 강의</li>
+                            <li class="mb-2">typescript 강의</li>
+                            <li class="mb-2">HTML/CSS 강의</li>
+                        </ul>
+                        <button class="btn btn-outline-dark w-100 mt-auto">선택하기</button>
+                    </div>
+                </div>
+            </div> 
+        </div>
+      </section>
+
+      <!-- 푸터 -->
+       <footer class="bg-dark text-white py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <h5 class="fw-bold">DevCamp</h5>
+                        <p class="small">비전공자도 파이팅!</p>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <h5 class="fw-bold">DevCamp</h5>
+                        <p class="small">비전공자도 파이팅!</p>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <h5 class="fw-bold">DevCamp</h5>
+                        <p class="small ">비전공자도 파이팅!</p>
+                    </div>
+                </div>
+                <hr class="border-secondary">
+                <p class="small text-center mb-0">
+                    &copy; 2026DevCamp
+                </p>
+
+            </div>
+       </footer>
+</body>
+</html>

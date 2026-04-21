@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">🌼 ABLY</div>
+            <nav class="header-nav">
+                <a href="">아우터</a>
+                <a href="">상의</a>
+                <a href="">하의</a>
+            </nav>
+            <div class="header-actions" style="display: flex; gap: 10px; align-items: center;">
+                <button id="wishlistToggleBtn" class="wishlist-toggle">❤️ 찜 목록 <span id="wishlistCount"
+                        style="font-weight: bold; color: var(--background--pink);">0</span></button>
+                <button class="login">로그인</button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <p>봄맞이 옷을 준비하세요.</p>
+                    <p>셔츠부터 청바지까지 에이블리에서</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="main-clothes">
+                <nav class="category-filters">
+                    <button class="filter-btn active" data-category="all">
+                        전체
+                    </button>
+                    <button class="filter-btn" data-category="outer">
+                        아우터
+                    </button>
+                    <button class="filter-btn" data-category="top">
+                        상의
+                    </button>
+                    <button class="filter-btn" data-category="bottom">
+                        하의
+                    </button>
+                </nav>
+                <h2>Today's Mood 🎯</h2>
+                <p class="main-clothes2">지금 필요한 상황별 코디템</p>
+            </div>
+            <div class="clothes">
+                <div class="clothes-grid"></div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer-rich">
+        <div class="footer-container">
+            <div class="footer-info">
+                <div class="footer-logo">🌼 ABLY</div>
+                <p class="company-details">
+                    (주)에이블리코퍼레이션 | 대표: 강석훈<br>
+                    사업자등록번호: 123-45-67890 | 통신판매업신고: 제2020-서울서초-0000호<br>
+                    서울특별시 서초구 서초대로 398<br>
+                    &copy; ABLY ALL RIGHTS RESERVED.
+                </p>
+            </div>
+            <div class="footer-cs">
+                <h3 class="cs-title">고객센터</h3>
+                <p class="cs-number">1588-0000</p>
+                <p class="cs-hours">운영시간: 평일 10:00 ~ 17:00<br>(점심시간 12:30 ~ 13:30, 주말/공휴일 휴무)</p>
+            </div>
+            <div class="footer-links">
+                <a href="">회사소개</a>
+                <a href="">이용약관</a>
+                <a href="">개인정보처리방침</a>
+                <a href="">입점안내</a>
+            </div>
+        </div>
+    </footer>
+    <div id="wishlistOverlay" class="wishlist-overlay" aria-hidden="true"></div>
+    <aside id="wishlistSidebar" class="wishlist-sidebar" aria-hidden="true">
+        <div class="wishlist-header">
+            <h2>❤️ 찜 목록</h2>
+            <button id="wishlistCloseBtn" class="wishlist-close-btn">&times;</button>
+        </div>
+        <div id="wishlistItems" class="wishlist-items">
+        </div>
+    </aside>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

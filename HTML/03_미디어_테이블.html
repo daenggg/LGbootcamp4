@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 미디어 & 테이블</title>
+</head>
+<body>
+    <h1>HTML5 미디어 요소</h1>
+    <!-- 이미지 + 캡션 -->
+    <h2>이미지 (figure + figcaption)</h2>
+    <!-- 
+    figure : 이미지/코드/차트 등을 감싸는 컨테이너
+    figcaption : 그 설명 (캡션) 
+    -->
+
+    <figure>
+        <img src="https://picsum.photos/seed/html5/400/250" alt="랜덤 이미지" width="400">
+        <figcaption> 그림 1. picsum.photos에서 불러온 랜덤 이미지입니다.</figcaption>
+    </figure>
+
+    <hr>
+
+    <!-- 비디오 -->
+    <h2>비디오</h2>
+    <!-- 
+    controls : 재생/정지/볼륨 컨트롤 표시
+    autoplay : 자동재생 (보통 muted와 함께 써야 작동)
+    loop : 반복재생
+     -->
+    <video width="400" controls>
+        <!-- source : 브라우저별 지원 포맷이 다를 때 여러 개 제공 -->
+         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+         이 브라우저는 비디오를 지원하지 않습니다.
+    </video>
+
+    <!-- 오디오 -->
+     <h2>오디오</h2>
+     <audio controls>
+        <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+        이 브라우저는 오디오를 지원하지 않습니다. 
+     </audio>
+
+     <hr>
+
+     <!-- 테이블 -->
+      <h2>수강생 목록</h2>
+     <!-- 
+      table : 표 전체
+      thead : 헤더 행 그룹
+      tbody : 본문 행 그룹
+      tr : 행 (row)
+      th : 헤더 셀 (굵게 + 가운데 정렬)
+      td : 일반 셀  
+    -->
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>나이</th>
+                <th>지역</th>
+                <th>관심분야</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>25</td>
+                <td>서울</td>
+                <td>프론트엔드</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>신짱구</td>
+                <td>5</td>
+                <td>도쿄</td>
+                <td>초코비</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>김철수</td>
+                <td>5</td>
+                <td>도쿄</td>
+                <td>짱구</td>
+            </tr>
+        </tbody>
+        <!-- tfoot : 합계/요약 행 -->
+         <tfoot>
+            <tr>
+                <td colspan="5">총 3명</td>
+            </tr>
+         </tfoot>
+    </table>
+
+</body>
+</html>

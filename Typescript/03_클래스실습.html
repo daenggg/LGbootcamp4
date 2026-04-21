@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Typescript 클래스 실습</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                padding: 40px;
+                background: #f5f5f5;
+            }
+            .account-card {
+                padding: 28px 32px;
+                max-width: 360px;
+            }
+            .panel {
+                background: white;
+                padding: 24px;
+                max-width: 360px;
+            }
+            .row {
+                display: flex;
+                gap: 8px;
+            }
+            .row input {
+                flex: 1;
+                padding: 8px 12px;
+            }
+            .log {
+                padding: 24px;
+                max-width: 360px;
+            }
+            #history {
+                list-style: none;
+            }
+            #history li {
+                display: flex;
+                justify-content: space-between;
+                padding: 8px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>은행 계좌 시스템</h1>
+        <p>클래스 실습 파일 작성 후 컴파일 후 열어보세요</p>
+
+        <div class="account-card">
+            <div id="bank"></div>
+            <div id="owner"></div>
+            <div class="label">잔액</div>
+            <div id="balance"></div>
+        </div>
+
+        <div class="panel">
+            <h3>거래</h3>
+            <div class="row">
+                <input type="number" id="amount" placeholder="금액 입력" min="1" />
+                <button class="btn-d" id="btnDeposit">입금</button>
+                <button class="btn-w" id="btnWithdraw">출금</button>
+            </div>
+            <p id="msg"></p>
+        </div>
+        <div class="log">
+            <h3>거래 내역</h3>
+            <ul id="history"></ul>
+        </div>
+
+        <script src="./03_클래스실습.js"></script>
+    </body>
+</html>

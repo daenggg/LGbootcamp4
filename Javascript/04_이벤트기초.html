@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>이벤트 기초 실습</title>
+        <style>
+            body {
+                padding: 24px;
+                background: #f5f5f5;
+            }
+            h1 {
+                margin-bottom: 24px;
+            }
+            h1 {
+                color: #1a1a2e;
+                margin: 28px 10px;
+            }
+
+            .box {
+                background: white;
+                padding: 20px;
+            }
+
+            /* 결과 로그창 */
+            .log {
+                background: #1e1e1e;
+                color: skyblue;
+                padding: 12px 14px;
+                min-height: 40px;
+            }
+
+            button {
+                padding: 8px 18px;
+                background: #1a1a2e;
+                color: white;
+                cursor: pointer;
+            }
+
+            input {
+                padding: 8px 12px;
+            }
+
+            /* 마우스 이벤트 데모 영역 */
+            #mouseBox {
+                height: 100px;
+                background-color: black;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                cursor: crosshair;
+                user-select: none;
+            }
+
+            #colorBox {
+                height: 60px;
+                background: yellow;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>이벤트 기초 실습</h1>
+
+        <!-- 1. 클릭 이벤트 -->
+        <h1>1. 클릭 이벤트 (click / dblclick)</h1>
+
+        <div class="box">
+            <button id="btnCount">클릭 카운터</button>
+            <button id="btnDouble">더블클릭</button>
+            <button class="btn-clear" data-target="log1">이 구역 로그 지우기</button>
+            <div class="log" id="log1">버튼을 클릭해보세요</div>
+        </div>
+
+        <!-- 2. 마우스 이벤트 -->
+        <h2>2. 마우스 이벤트 - mouseover mouseout mousemove</h2>
+        <div class="box">
+            <div id="mouseBox">마우스를 올려보세요</div>
+            <button class="btn-clear" data-target="log2">이 구역 로그 지우기</button>
+            <div class="log" id="log2">버튼을 클릭해보세요</div>
+        </div>
+
+        <!-- 3. 키보드 이벤트 -->
+        <h2>3. 키보드 이벤트 keydown/keyup</h2>
+        <div class="box">
+            <input type="text" id="keyInput" placeholder="여기에 타이핑해보세요" />
+            <button class="btn-clear" data-target="log3">이 구역 로그 지우기</button>
+            <div class="log" id="log3">버튼을 클릭해보세요</div>
+        </div>
+
+        <!-- 4. 폼 이벤트 -->
+        <h2>4. 폼 이벤트 - input / change / submit</h2>
+        <div class="box">
+            <form id="myForm">
+                <input type="type" id="nameInput" placeholder="이름 입력" required="" />
+                <select id="jobSelect">
+                    <option value="">직업 선택</option>
+                    <option value="student">학생</option>
+                    <option value="developer">개발자</option>
+                </select>
+                <button type="submit">제출</button>
+            </form>
+            <button class="btn-clear" data-target="log4">이 구역 로그 지우기</button>
+            <div class="log" id="log4">버튼을 클릭해보세요</div>
+        </div>
+
+        <!-- 5. 색상 선택기 -->
+        <h2>5. 색상 선택기</h2>
+        <div class="box">
+            <button class="color-btn" style="background: red" data-color="red"></button>
+            <button class="color-btn" style="background: black" data-color="black"></button>
+            <button class="color-btn" style="background: aqua" data-color="aqua"></button>
+            <button class="color-btn" style="background: skyblue" data-color="skyblue"></button>
+            <button class="color-btn" style="background: green" data-color="green"></button>
+            <div id="colorBox">
+                <button class="btn-clear" data-target="log5">이 구역 로그 지우기</button>
+                <div class="log" id="log5">버튼을 클릭해보세요</div>
+            </div>
+        </div>
+
+        <script>
+            // 공통 로그 출력 함수
+            function log(id, msg) {
+                const el = document.getElementById(id);
+                const time = new Date().toLocaleTimeString();
+                el.innerText = "[" + time + "]" + msg + "\n" + el.innerText;
+            }
+
+            // 공통 로그 지우기 함수
+            const clearButtons = document.querySelectorAll(".btn-clear");
+
+            clearButtons.forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    // 버튼에 설정된 data-target 값을 가져옵니다 ex log1, log2
+                    const targetId = this.dataset.target;
+                    // 해당 ID를 가진 로그창을 찾아서 비웁니다.
+                    const targetLog = document.getElementById(targetId);
+
+                    if (targetLog) {
+                        targetLog.textContent = ""; //로그 내용 삭제
+                    }
+
+                    // 추가 기능 : 1번 로그일 경우 카운트 변수도 초기화
+                    if (targetId === "log1") {
+                        count = 0;
+                        log("log1", "카운트가 초기화 되었습니다.");
+                    } else {
+                        log(targetId, "해당 영역의 로그가 초기화 되었습니다.");
+                    }
+                });
+            });
+
+            // 1. 클릭 이벤트
+            let count = 0;
+            // 같은 요소에 여러 이벤트를 추가할 수 있고, 나중에 제거도 가능
+            document.getElementById("btnCount").addEventListener("click", function () {
+                count++;
+                log("log1", "클릭! 총 " + count + "번");
+            });
+
+            // dblclick : 더블클릭 이벤트
+            document.getElementById("btnDouble").addEventListener("dblclick", function () {
+                log("log1", "더블클릭 감지!");
+            });
+
+            // 2. 마우스 이벤트
+            const mouseBox = document.getElementById("mouseBox");
+
+            // "mouseover" : 마우스 커서가 요소 위로 들어올 때 발생
+            // function 안의 this : 이벤트가 발생한 요소 자신 (=mouseBox)
+            mouseBox.addEventListener("mouseover", function () {
+                this.style.background = "#e94560";
+                this.textContent = "들어왔어요!";
+                log("log2", "mouseover : 마우스 진입");
+            });
+
+            // "mouseout" : 마우스 커서가 요소 밖으로 나갈 때 발생
+            mouseBox.addEventListener("mouseout", function () {
+                this.style.background = "black";
+                this.textContent = "마우스를 올려보세요!";
+                log("log2", "mouseout : 마우스 나감");
+            });
+
+            // "mousemove" : 마우스 커서가 요소 위에서 움직일 때마다 발생
+            // event 객체 : 이벤트에 관한 정보를 담은 객체 (함수의 첫 번째 매개변수로 받음)
+            // event.offsetX / event.offsetY : 요소 기준 마우스 좌표 (픽셀)
+            mouseBox.addEventListener("mousemove", function (event) {
+                this.textContent = "X : " + event.offsetX + ", Y : " + event.offsetY;
+            });
+
+            // 3. 키보드 이벤트
+            const keyInput = document.getElementById("keyInput");
+
+            // "keydown" : 키를 누르는 순간 발생 (누르고 있는 동안 반복 발생)
+            // event.key : 눌린 키의 이름 ('a', 'Enter', 'Backspace')
+            keyInput.addEventListener("keydown", function (event) {
+                log("log3", "keydown: " + event.key);
+            });
+
+            // "keydown" : 키에서 손을 떼는 순간 발생
+            // this.value : input 요소의 현재 입력값 (keyup 시점엔 이미 값이 반영됨)
+            keyInput.addEventListener("keyup", function () {
+                log("log3", '현재 입력값: "' + this.value + '"');
+            });
+
+            // 특정 키 감지 : event.key === '키이름'으로 원하는 키만 처리
+            keyInput.addEventListener("keydown", function () {
+                if (event.key === "Enter") {
+                    log("log3", "엔터! 입력값: " + this.value);
+                    this.value = ""; //입력창 비우기
+                }
+            });
+
+            // 4. 폼 애벤트
+            const nameInput = document.getElementById("nameInput");
+            const jobSelect = document.getElementById("jobSelect");
+
+            // "input" :  입력값이 바뀔 때마다 실시간으로 발생 (한 글자씩)
+            nameInput.addEventListener("input", function () {
+                log("log4", 'input 이벤트 : "' + this.value + '"');
+            });
+
+            // "change" : 선택이 완전히 바뀐 후 발생
+            // input과 달리 포커스를 잃거나 선택이 확정됐을 때 발생
+
+            jobSelect.addEventListener("change", function () {
+                log("log4", "change 이벤트 : " + this.value);
+            });
+
+            // "submit" : 폼의 제출 버튼을 클릭하거나 엔터 키를 눌렀을 때 발생
+            // event.preventDefault() : 브라우저 기존 동작을 막음! -> 가끔 제출 버튼 누르면 새로고침 됨... 그때만 쓰세요
+
+            document.getElementById("myForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+                log("log4", "제출! 이름 " + nameInput.value + "직업 " + jobSelect.value);
+            });
+
+            // 5. 색상 선택기
+            // querySelectorAll('선택자') : 조건에 맞는 모든 요소를 NodeList로 반환
+            // querySelector는 하나만, All을 붙이면 여러 개
+
+            const colorBtns = document.querySelectorAll(".color-btn");
+            const colorBox = document.getElementById("colorBox");
+
+            // NodeList.ForEach : 배열의 forEach처럼 각 요소에 함수를 실행
+            colorBtns.forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    // this.dataset.속성명 : HTML의 data-속성명 값을 읽음
+                    // <button data-color = 'red' -> this.dataset.color ==='red'
+                    const color = this.dataset.color;
+                    colorBox.style.background = color;
+                    log("log5", "선택한 색상 : " + color);
+                });
+            });
+        </script>
+    </body>
+</html>

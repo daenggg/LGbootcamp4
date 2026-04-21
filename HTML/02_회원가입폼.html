@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+</head>
+<body>
+    <h1>회원가입</h1>
+    <!-- 
+    form : 데이터를 사용자에게 입력받아 서버에 전송하는 컨테이너
+    action : 데이터를 보낼 URL
+    method :  GET(URl에 노출) vs POST(숨겨서 전송)
+    -->
+
+    <form action="#" method="post">
+        <!-- fieldset : 연관된 입력 요소를 그룹화 / legend : 그룹 제목 (잘 안 쓰임) -->
+        <fieldset>
+            <legend>기본 정보</legend>
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required>
+            <!-- <br> : 줄바꿈 -->
+            <br>
+
+            <!-- type = "email" : @ 포함 여부 자동 검증 -->
+             <label for="email">이메일</label>
+             <input type="email" id="email" name="email" placeholder="hong@example.com">
+             <br>
+
+            <!-- type = "password" : 입력값 ****로 처리 -->
+             <label for="password">비밀번호</label>
+             <input type="password" id="password" name="password" minlength="4" required>
+             <br>
+
+             <!-- type = "date" : 날짜 선택 달력 표시 -->
+            <label for="birth">생년월일</label>
+             <input type="date" id="birth" name="birth">
+             <br>
+
+             <!-- type : "tel" : 모바일에서 숫자 키패드 표시 -->
+            <label for="phone">전화번호</label>
+             <input type="tel" id="phone" name="phone">
+             <br>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>추가 정보</legend>
+
+            <!-- radio : 여러 개 중 하나만 선택 (name이 같아야 그룹)-->
+            <p>성별</p>
+            <label><input type="radio" name="gender" value="male">남성</label>
+            <label><input type="radio" name="gender" value="female">여성</label>
+
+            <!-- checkbox : 여러 개 중 복수 선택 가능 (name이 같아야 그룹)-->
+            <p>관심 분야</p>
+        
+            <label><input type="checkbox" name="interest" value="frontend">프론트엔드</label>
+            <label><input type="checkbox" name="interest" value="backend">백엔드</label>
+            <label><input type="checkbox" name="interest" value="design">디자인</label>
+            <br>
+
+            <!-- select + option : 드롭다운 선택 -->
+            <label for="job">직업</label>
+            <select id="job" name="job">
+                <option value="">선택하세요</option>
+                <option value="student">학생</option>
+                <option value="worker">직장인</option>
+                <option value="freelancer">프리랜서</option>
+            </select>
+            <br>
+
+            <!-- textarea : 여러 줄 텍스트 입력 -->
+             <label for="intro">자기소개</label><br>
+             <textarea id="intro" name="intro" rows="5" cols="40" placeholder="간단히 소개해주세요"></textarea>
+             <br>
+
+             <label>
+                <input type="checkbox" name="agree" required>
+                이용약관에 동의합니다(필수)
+             </label>
+             <br>
+
+             <!-- type = "submit" : 폼 데이터 전송 -->
+             <button type="submit">가입하기</button>
+             <!-- type = "reset" : 모든 입력값 초기화 -->
+             <button type="reset">초기화</button>
+        </fieldset>
+    </form>
+</body>
+</html>
