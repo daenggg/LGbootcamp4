@@ -1,13 +1,14 @@
 /*
-* 주제 : 조건문, 반복문
-* 조건에 따라 다른 코드를 실행하는 조건문을 익힌다
-* 코드를 반복 실행하는 반복문을 익힌다
-* 반복문의 흐름을 제어하는 break와 continue를 이해한다.
-* */
+ * 주제 : 조건문 , 반복문
+ * 조건에 따라 다른 코드를 실행하는 조건문을 익힌다
+ * 코드를 반복 실행하는 반복문을 익힌다
+ * 반복문의 흐름을 제어하는 break와 continue 를 이해한다.
+ * */
+
 
 public class ControlFlow {
-    static void main(String[] args){
-//        1. if / else if / else
+    static void main(String[] args) {
+//        1. if /else if /else
         int score = 78;
         if (score >= 90) {
             System.out.println("학점: A");
@@ -19,16 +20,13 @@ public class ControlFlow {
             System.out.println("학점: F (재수강)");
         }
 
-
-
-
 //        중첩 if
         int age = 18;
         boolean hasID = true;
-        if(age >= 19) {
+        if (age >= 19) {
             if (hasID) {
                 System.out.println("입장 가능!");
-            } else  {
+            } else {
                 System.out.println("신분증이 필요합니다.");
             }
         } else {
@@ -36,10 +34,10 @@ public class ControlFlow {
         }
 
 //        2. switch 문
-//        변수의 값에 따라 여러 경우 중 하나를 실행한다.
-//        if else - 가 많아질 거 같을 때 쓰면 가독성이 좋아진다.
-//        break 를 빠트리면 다음 case로 실행이 넘어가니 반드시 써줘야한다.
-        int day = 6; // 1 - 월, 2 - 화, 3 - 수, 4 - 목, 5 - 금, 6 - 토, 7 - 일
+//        변수에 값에 따라 여러 경우 중 하나를 실행한다.
+//        if else - 가 많아질 거 같을때 쓰면 가독성이 좋아진다.
+//        break 를 빠드리면 다음 case로 실행이 넘어가니 반드시 써줘야한다.
+        int day = 7; // 1 -월, 2-화 ,3 - 수, 4- 목, 5-금,6-토,7-일
 
         switch (day) {
             case 1:
@@ -69,22 +67,23 @@ public class ControlFlow {
         }
 
 //        switch에서 여러 case를 묶는 방법
-        switch (day){
+        switch (day) {
             case 6:
             case 7:
-//                6 또는 7인 경우 모두 이 블록 실행
+//                    6 또는 7인 경우 모두 이 블록 실행
                 System.out.println("주말입니다!");
                 break;
             default:
-                System.out.println("평일입니다!");
+                System.out.println("평일입니다.");
+
         }
 
 //        3. for 문
-//        반복 횟수가 정해진 경우에 주로 사용한다.
+//        반복 횟수가 정해진 경우에 주로 사용한다
 //        형식 : for (초기화; 조건; 증감) {반복할 코드}
 //        1부터 5까지 출력
         for (int i = 1; i <= 5; i++) {
-            System.out.print("i = " + i+ " ");
+            System.out.print("i = " + i + " ");
         }
 //        1부터 10까지 합계 구하기
         int sum = 0;
@@ -94,43 +93,44 @@ public class ControlFlow {
         System.out.println("합계" + sum);
 
 //        중첩 for문
-        for (int dan = 2; dan <= 3; dan++){
-            for(int i = 1; i <= 9; i++){
-//                System.out.print(dan + "x" + i + "=" + (dan*i) + " ");
-                System.out.printf("%d x %d = %2d%n", dan, i, dan*i);
+        for (int dan = 2; dan <= 3; dan++) {
+            for (int i = 1; i <= 9; i++) {
+//                System.out.print(dan + " " + i + " " + dan * i);
+                System.out.printf("%d x %d = %2d%n", dan, i, dan * i);
             }
-            System.out.println(" ");
+            System.out.println();
         }
 
-//        4. while 문
-//        조건이 참인 동안 반복 실행된다.
-//        반복 횟수를 미리 모를 때 주로 사용한다.
-//        조건이 처음부터 false면 한 번도 실행되지 않는다.
 
+//        4. while 문
+//        조건이 참인 동안 반복 실행된다
+//        반복 횟수를 미리 모를 때 주로 사용한다.
+//        조건이 처음부터 false 면 한 번도 실행되지 않는다.
         int n = 1;
         while (n <= 5) {
             System.out.println("n = " + n);
-            n++; // while문 같은 경우에는 특히나 무한루프에 빠지기 쉬우므로
+            n++; // while문 같은 경우에는 특히나 '무한루프' 에 빠지기 쉬우므로
 //            반드시 탈출 조건을 정확히 작성해 주어야 한다.
         }
 
-//      while로 자릿수 계산하기
+//        while로 자릿수 계산하기
         int number = 12345;
         int digits = 0;
         int temp = number;
         while (temp > 0) {
-            temp /= 10; // 10으로 나누면 자릿수가 하나식 줄어든다
+            temp /= 10; //10으로 나누면 자릿수가 하나씩 줄어든다
             digits++;
         }
-        System.out.println(number + "의 자릿수는 " + digits + "자리");
+        System.out.println(number + "의 자릿수" + digits + "자리");
 
-//    do-while 문
-//    while문과 비슷하지만, 조건 검사를 나중에 합니다. → 최소 1번은 실행된다.
+        //    do-while 문
+//    while문과 비슷하지만, 조건 검사를 나중에 합니다.-> 최소 1번은 실행된다
         int attempt = 1;
+
         do {
             System.out.println("시도 횟수" + attempt);
             attempt++;
-        } while(attempt <= 3);
+        } while (attempt <= 3);
 
 //        while 과의 차이 비교
         System.out.println("while과의 차이");
@@ -139,11 +139,12 @@ public class ControlFlow {
         while (val < 5) {
             System.out.println("while: 실행됨");
         }
+
         do {
             System.out.println("do-while: 조건이 false여도 1번 실행됨");
         } while (val < 5);
 
-//        6. break와 continue
+//        6. break 와 continue
 //        break 반복문을 즉시 종료하고 빠져나온다
         for (int i = 1; i <= 10; i++) {
             if (i == 5) {
@@ -152,67 +153,73 @@ public class ControlFlow {
             }
         }
 
-//        continue 이번 반복만 건너 뛰고 다음 반복으로 넘어간다
+//        continue : 이번 반복만 건너 뛰고 다음 반복으로 넘어간다
         for (int i = 1; i <= 20; i++) {
             if (i % 2 == 0) {
-                continue; // 짝수면 아래 출력 건너뛰고 다음 if
+                continue; //짝수면 아래 출력 건너뛰고 다음 ifh
             }
-            System.out.println(i + " "); // 홀수만 출력됨
+            System.out.println(i + " "); //홀수만 출력됨
         }
-
 //        TODO 실습 문제
         /*
-        * 1. for문으로 1~100사이의 홀수 합계를 구하시오
-        * 2. 중첩 for문으로 구구단 전체(너무 많으면 일부만)를 출력하세요
-        * 3. while문으로 2의 거듭제곱을 1000이 넘기 전까지 출력하세요
-        * 4. switch 문으로 달(month)을 입력받아 해당 달의 계절을 출력하세요
-        * 3~5월: 봄, 6~8월: 여름, 9~11월: 가을, 12~2월: 겨울
-        * */
+         * 1. for문으로 1~100사이의 홀수 합계를 구하시오
+         * 2. 중첩 for문으로 구구단 전체(너무 많으면 일부만)를 출력하세요
+         * 3. while문으로 2의 거듭제곱 을 1000이 넘기 전까지 출력하세요
+         * 4. switch 문으로 달(month)을 입력받아 해당 달의 계절을 출력하세요
+         * (3~5월 : 봄, 6~8월 : 여름 , 9~11월: 가을 , 12~2월:겨울)
+         *
+         * */
 
-//        1번
-        int answer = 0;
+//        1.
+        int oddSum = 0;
         for (int i = 1; i <= 100; i++) {
-            if (i % 2 == 0) {
-                continue;
-            } else{
-                answer += i;
+            if (i % 2 != 0) { //홀수를 더한다
+                oddSum += i;
             }
         }
-        System.out.println("1~100사이의 홀수 합계 = " + answer);
 
-//        2번
-        for (int dan = 2; dan <= 4; dan++) {
-            for (int i = 1; i <= 9; i++){
-                System.out.print(dan + "x" + i + "=" + (dan*i) + " ");
+        System.out.println("1 " + oddSum);
+
+//        2.
+        for (int dan = 2; dan <= 9; dan++) { // 바깥 루프 : 단 (2~9)
+            for (int i = 1; i <= 9; i++) { //안쪽 루프 : 곱하는 수 (1~9)
+                System.out.printf("%d x %d = %2d%n", dan, i, dan * i);
             }
-            System.out.println(" ");
         }
-//        3번
-        int q = 1;
-        while (q < 1000){
-            System.out.print(q + " ");
-            q *= 2;
+
+//        3.
+        int power = 1;
+        while (power < 1000) { // 1000을 넘기 전까지 반복
+            System.out.print(power + " ");
+            power *= 2; //다음 거듭제곱으로 (x2)
         }
-        System.out.println(" ");
-//        4번
-        int month = 9;
+        System.out.println();
+//        4.
+        int month = 7;
+        System.out.println(month + "월의 계절: ");
         switch (month) {
-            case 3, 4, 5 :
+            case 3:
+            case 4:
+            case 5:
                 System.out.println("봄");
                 break;
-            case 6, 7, 8 :
+            case 6:
+            case 7:
+            case 8:
                 System.out.println("여름");
                 break;
-            case 9, 10, 11 :
+            case 9:
+            case 10:
+            case 11:
                 System.out.println("가을");
                 break;
-            case 12, 1, 2 :
+            case 12:
+            case 1:
+            case 2:
                 System.out.println("겨울");
                 break;
             default:
                 System.out.println("잘못된 월 입력");
-
         }
     }
-
 }
